@@ -41,7 +41,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		Timer t = new Timer(16, this);
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		f.setVisible(true);
+		f.setVisible(true); 
 		/*BufferedImage cursorImg;
 		try {
 					cursorImg =  ImageIO.read(new File("crosshair img.png"));
