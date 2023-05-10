@@ -30,8 +30,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	
 	public Driver() {
 		
-		JFrame f = new JFrame("IDK Yet");
-		f.setSize(new Dimension(1200, 900));
+		JFrame f = new JFrame("Hazz Hoops");
+		f.setSize(new Dimension(1800, 1000));
 		f.setBackground(new Color(0, 0, 0));
 		f.add(this);
 		f.setResizable(false);
