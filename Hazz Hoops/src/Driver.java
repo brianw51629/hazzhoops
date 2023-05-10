@@ -40,7 +40,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		f.addKeyListener(this);
 		Timer t = new Timer(16, this);
 		t.start();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		f.setVisible(true);
 		/*BufferedImage cursorImg;
 		try {
