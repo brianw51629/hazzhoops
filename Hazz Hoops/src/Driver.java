@@ -27,7 +27,7 @@ import javax.swing.Timer;
 import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
-	
+	Background bckg = new Background();
 	public Driver() {
 		
 		JFrame f = new JFrame("Hazz Hoops");
@@ -57,6 +57,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 		
 		}
+	
+	
+	public void paint(Graphics g) {
+		super.paintComponent(g);
+		bckg.paint(g);
+		
+		
+		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
+		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
+		 
+	}
+	
+	
+	
 	public static void main(String[] arg) {
 		Driver f = new Driver();
 		
