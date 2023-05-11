@@ -28,6 +28,16 @@ import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
 	Background bckg = new Background();
+	public void paint(Graphics g) {
+		super.paintComponent(g);
+		bckg.paint(g);
+		
+		
+		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
+		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
+		 
+	}
+	
 	public Driver() {
 		
 		JFrame f = new JFrame("Hazz Hoops");
@@ -59,38 +69,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 	
 	
-	public void paint(Graphics g) {
-		super.paintComponent(g);
-		bckg.paint(g);
-		
-		
-		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
-		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
-		 
-	}
+	
 	
 	
 	
 	public static void main(String[] arg) {
 		Driver f = new Driver();
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -103,31 +87,56 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+		
+			
+				
 	}
-
+	
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		repaint();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg32) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
 		
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void keyReleased(KeyEvent arg32) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 	
 	

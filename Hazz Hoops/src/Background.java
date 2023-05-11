@@ -15,10 +15,10 @@ public class Background {
 	private AffineTransform tx;
 
 	public Background() {
-		img = getImage("/imgs/temp background.png"); // load the image for Tree
+		img = getImage("/imgs/tempBackground.png"); // load the image for Background
 
 		tx = AffineTransform.getTranslateInstance(x, y);
-		init(0, 1000); // initialize the location of the image
+		init(0,0); // initialize the location of the image
 					// use your variables
 
 		
@@ -42,8 +42,9 @@ public class Background {
 	public void paint(Graphics g) {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		update();
+		
 		g2.drawImage(img, tx, null);
+		update();
 	}
 
 	private void update() {
@@ -53,7 +54,7 @@ public class Background {
 
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(0.25, 0.25);
+		tx.scale(1, 1);
 	}
 
 	private Image getImage(String path) {
