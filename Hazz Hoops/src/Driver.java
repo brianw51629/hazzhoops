@@ -28,10 +28,16 @@ import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
 	Background bckg = new Background();
+	Character p1 = new Character();
+	
+	
+	
+	
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bckg.paint(g);
-		
+		p1.paint(g);
 		 
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
