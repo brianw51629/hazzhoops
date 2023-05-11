@@ -13,7 +13,7 @@ public class Background {
 	private int x, y;
 	private Image img;
 	private AffineTransform tx;
-
+ 
 	public Background() {
 		img = getImage("/imgs/tempBackground.png"); // load the image for Background
 
