@@ -29,7 +29,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 	Background bckg = new Background();
 	Character p1 = new Character();
-	
+	Ball b1 = new Ball();
 	
 	
 	
@@ -38,7 +38,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		super.paintComponent(g);
 		bckg.paint(g);
 		p1.paint(g);
-		 
+		b1.paint(g); 
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 		 

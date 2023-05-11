@@ -21,8 +21,8 @@ public class Ball {
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); // initialize the location of the image
 					// use your variables
-		x = 450;
-		y = 200;
+		x = 665;
+		y = 875;
 
 	}
 
@@ -49,7 +49,7 @@ public class Ball {
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));
 		tx.setToTranslation(x, y);
-		tx.scale(3, 3);
+		tx.scale(0.05, 0.05);
 		//g.drawRect(x+20,y,75,75);
 		
 	}
