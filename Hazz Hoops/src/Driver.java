@@ -27,16 +27,19 @@ import javax.swing.Timer;
 import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
-	Background bckg = new Background();
+	Gym bckg = new Gym();
 	Balanced p1 = new Balanced(50,50,20,50);
 	Ball b1 = new Ball();
-	
+	Hoop h1 = new Hoop();
+	Hoop h2 = new Hoop("HoopRight");
 	
 	
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		bckg.paint(g);
+		h1.paint(g);
+		h2.paint(g);
 		p1.paint(g);
 		b1.paint(g); 
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
