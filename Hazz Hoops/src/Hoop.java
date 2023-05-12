@@ -24,7 +24,7 @@ public class Hoop {
 		y=375;
 
 	}
-
+ 
 	public Hoop(String fileName) {
 		img = getImage("/imgs/" + fileName); // load the image for Tree
 
