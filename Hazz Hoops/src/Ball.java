@@ -15,6 +15,7 @@ public class Ball {
 	private Image img;
 	private AffineTransform tx;
 	private int newV = 0;
+	private boolean shot = false;
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
 
@@ -50,6 +51,19 @@ public class Ball {
 		g.setColor(new Color(0,0,0));
 		tx.setToTranslation(x, y);
 		tx.scale(0.05, 0.05);
+		if(y<=400) {
+			vy=0;
+		}
+		if(x>1350&&shot) {
+			vy=10;
+			if(y>525) {
+				vx=0;
+			}
+		}
+		
+		
+		x+=vx;
+		y+=vy;
 		//g.drawRect(x+20,y,75,75);
 		
 	}
@@ -89,7 +103,23 @@ public class Ball {
 		return tempImage;
 	}
 	
+	public void moveStop() {
+		vx=0;
+	}
+	public void moveLeft(int speed) {
+		vx=-(speed);
+		System.out.println("worked");
+	}
+	public void moveRight(int speed) {
+		vx=(speed);
+		System.out.println("worked");
+	}
 	
+	public void shot() {
+		vx=10;
+		vy=-10;
+		shot=true;
+	}
 	
 	public int getX() {
 		return x;

@@ -28,7 +28,7 @@ import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
 	Background bckg = new Background();
-	Character p1 = new Character();
+	Balanced p1 = new Balanced(50,50,20,50);
 	Ball b1 = new Ball();
 	
 	
@@ -126,8 +126,19 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		
-		
+		System.out.println(arg32.getKeyCode());
+		if(arg32.getKeyCode()==65) {
+			p1.moveLeft();
+			b1.moveLeft(p1.getSpeed());
+		}
+		if(arg32.getKeyCode()==68) {
+			p1.moveRight();
+			b1.moveRight(p1.getSpeed());
+		}
+		if(arg32.getKeyCode()==87) {
+			p1.shot();
+			b1.shot();
+		}
 		
 		
 		
@@ -136,7 +147,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void keyReleased(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		
+		if(arg32.getKeyCode()==65) {
+			p1.moveStop();
+			b1.moveStop();
+		}
+		if(arg32.getKeyCode()==68) {
+			p1.moveStop();
+			b1.moveStop();
+		}
 	}
 
 	@Override

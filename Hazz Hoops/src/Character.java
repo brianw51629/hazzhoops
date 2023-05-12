@@ -17,6 +17,10 @@ public class Character {
 	private Image img;
 	private AffineTransform tx;
 	private int newV = 0;
+	private int block;
+	private int shoot;
+	private int speed;
+	private int steal;
 	public Character() {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
@@ -24,6 +28,29 @@ public class Character {
 		
 		x=500;
 		y=675;
+		block=50;
+		shoot=50;
+		speed=10;
+		steal=50;
+		 // initialize the location of the image
+					// use your variables
+		
+	}
+	
+	
+	public Character(int bl, int sh, int sp, int st) {
+		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
+
+		tx = AffineTransform.getTranslateInstance(x, y);
+		
+		x=500;
+		y=675;
+		vx=0;
+		vy=0;
+		block=bl;
+		shoot=sh;
+		speed=sp;
+		steal=st;
 		 // initialize the location of the image
 					// use your variables
 		
@@ -38,6 +65,8 @@ public class Character {
 		
 		x = 500;
 		y = 470;
+		vx=0;
+		vy=0;
 	}
 
 	public void changePicture(String newFileName) {
@@ -49,11 +78,19 @@ public class Character {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
+		System.out.println(y);
 		//update();
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));
-		//x+=vx;
+		if(y<=650) {
+			vy=10;
+		}
+		if(y>675) {
+			vy=0;
+			y=675;
+		}
+		x+=vx;
+		y+=vy;
 		tx.setToTranslation(x, y);
 		tx.scale(3,3);
 		//g.drawRect(x+20,y,75,75);
@@ -71,12 +108,15 @@ public class Character {
 	}
 	
 	public void moveLeft() {
-		vx=-10;
+		vx=-(speed);
 		System.out.println("worked");
 	}
 	public void moveRight() {
-		vx=10;
+		vx=(speed);
 		System.out.println("worked");
+	}
+	public void shot() {
+		vy=-10;
 	}
 	public void moveStop() {
 		vx=0;
@@ -98,7 +138,9 @@ public class Character {
 	}
 	
 	
-	
+	public int getSpeed() {
+		return speed;
+	}
 	public int getX() {
 		return x;
 	}
