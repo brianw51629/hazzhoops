@@ -141,11 +141,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(arg32.getKeyCode()==87) {
 			p1.shot();
 			if(p1.getX()<=750) {
-			b1.far();
+				b1.far();
+				System.out.println("far");
 			}
+			
 			if(p1.getX()>750) {
-				b1.normal();
+				if(p1.getX()>1050) {
+					b1.close();
+					System.out.println("close");
+				}else {
+					b1.normal();
+				System.out.println("normal");
 				}
+				
+			}
 		}
 		
 		
