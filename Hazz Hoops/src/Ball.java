@@ -45,7 +45,7 @@ public class Ball {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		
+		    
 		
 		//update();
 		g2.drawImage(img, tx, null);
