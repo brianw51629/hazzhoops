@@ -15,7 +15,9 @@ public class Ball {
 	private Image img;
 	private AffineTransform tx;
 	private int newV = 0;
-	private boolean shot = false;
+	private boolean far = false;
+	private boolean normal = false;
+	private boolean close = false;
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
 
@@ -51,13 +53,26 @@ public class Ball {
 		g.setColor(new Color(0,0,0));
 		tx.setToTranslation(x, y);
 		tx.scale(0.05, 0.05);
-		if(y<=400) {
-			vy=0;
+		if(far) {
+			if(y<=400) {
+				vy=0;
+			}
+			if(x>1350) {
+				vy=20;
+				if(y>525) {
+					vx=0;
+				}
+			}
 		}
-		if(x>1350&&shot) {
-			vy=10;
-			if(y>525) {
-				vx=0;
+		if(normal) {
+			if(y<=400) {
+				vy=0;
+			}
+			if(x>1320) {
+				vy=20;
+				if(y>525) {
+					vx=0;
+				}
 			}
 		}
 		
@@ -115,10 +130,15 @@ public class Ball {
 		System.out.println("worked");
 	}
 	
-	public void shot() {
-		vx=10;
-		vy=-10;
-		shot=true;
+	public void far() {
+		vx=20;
+		vy=-20;
+		far=true;
+	}
+	public void normal() {
+		vx=30;
+		vy=-30;
+		normal=true;
 	}
 	
 	public int getX() {

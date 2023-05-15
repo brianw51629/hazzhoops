@@ -78,7 +78,7 @@ public class Character {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		System.out.println(y);
+		System.out.println(x);
 		//update();
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));
@@ -115,17 +115,30 @@ public class Character {
 		vx=(speed);
 		System.out.println("worked");
 	}
+	
+	
+	
 	public void shot() {
 		vy=-10;
 	}
+	
+	
+	
+	
 	public void moveStop() {
 		vx=0;
 	}
+	
+	
+	
+	
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(0, 0);
 	}
 
+	
+	
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {

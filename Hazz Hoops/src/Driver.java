@@ -31,7 +31,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Balanced p1 = new Balanced(50,50,20,50);
 	Ball b1 = new Ball();
 	Hoop h1 = new Hoop();
-	Hoop h2 = new Hoop("HoopRight");
+	Hoop h2 = new Hoop("HoopRight.png");
 	
 	
 	
@@ -140,7 +140,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if(arg32.getKeyCode()==87) {
 			p1.shot();
-			b1.shot();
+			if(p1.getX()<=750) {
+			b1.far();
+			}
+			if(p1.getX()>750) {
+				b1.normal();
+				}
 		}
 		
 		

@@ -15,7 +15,7 @@ public class Hoop {
 	private AffineTransform tx;
  
 	public Hoop() {
-		img = getImage("/imgs/HoopV2.png"); // load the image for Background
+		img = getImage("/imgs/HoopLeft.png"); // load the image for Background
 
 		tx = AffineTransform.getTranslateInstance(x, y);
 		 // initialize the location of the image
@@ -30,7 +30,7 @@ public class Hoop {
 
 		tx = AffineTransform.getTranslateInstance(x, y);
 		y=375;
-		x=1500;
+		x=1200;
 		// initialize the location of the image
 					// use your variables
 	}
