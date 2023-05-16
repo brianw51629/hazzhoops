@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.net.URL;
 
-public class Ball {
+public class Ball { 
 	private int x, y;
 	private int vx, vy;
 	private Image img;
