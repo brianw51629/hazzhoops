@@ -32,8 +32,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Ball b1 = new Ball();
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
-	
-	
+	private int points;
+	Rectangle basket1 = new Rectangle(1450 , 530, 60, 60);
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -45,6 +45,13 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 		 
+		g.setColor(Color.black);
+			g.drawRect(1450 , 530, 60, 60 );
+
+			if(b1.hit(basket1)) {
+				points++;
+				System.out.println(points);
+			}
 	}
 	
 	public Driver() {
@@ -75,11 +82,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		
 
 		
+		
+		
+		
+		
+		
 		}
 	
 	
-	
-	
+		
+		
 	
 	
 	public static void main(String[] arg) {
@@ -142,6 +154,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			p1.shot();
 			if(p1.getX()<=750) {
 				b1.far();
+				
 				System.out.println("far");
 			}
 			

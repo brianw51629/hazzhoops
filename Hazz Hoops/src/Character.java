@@ -78,7 +78,7 @@ public class Character {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
 		
-		System.out.println(x);
+		//System.out.println(x);
 		//update();
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));

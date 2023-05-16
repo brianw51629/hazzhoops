@@ -68,7 +68,8 @@ public class Ball {
 			}
 		
 		
-		
+			g.setColor(Color.black);
+			g.drawRect( x + 2, y , 45, 45);
 		x+=vx;
 		y+=vy;
 		//g.drawRect(x+20,y,75,75);
@@ -156,22 +157,21 @@ public class Ball {
 	public void setVX(int setter) {
 		vx = setter;
 	}
-	public boolean hit(MouseEvent mouse) {
+	public boolean hit(Rectangle h) {
 		
 		//represent the mouse as a rectangle
 		
-		Rectangle m = new Rectangle(mouse.getX(),mouse.getY(), 25, 25);
+		//Rectangle b = new Rectangle(m.getX(),mouse.getY(), 25, 25);
 		
 		
 		//Duck hit box
 		
-		Rectangle d = new Rectangle(x+20,y,75,75);
-		//Rectangle d2 = new Rectangle(x+20,y,75,75);
+		Rectangle ballHitbox = new Rectangle(x + 2, y , 45, 45);
 		
-		if(m.intersects(d)) {
-			vx=0;
-			vy=10;
-			System.out.println("HIT");
+		
+		if(h.intersects(ballHitbox)) {
+			
+			System.out.println("SCORE");
 			return true;
 		}
 	
