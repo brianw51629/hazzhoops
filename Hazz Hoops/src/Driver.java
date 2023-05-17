@@ -178,15 +178,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			p1.moveRight();
 			b1.moveRight(p1.getSpeed());
 		}
-		}
+		
 		if(arg32.getKeyCode()==87) {
-			p1.shot();
 			p1.moveStop();
+			b1.moveStop();
+			b1.setVY(0);
+			b1.setY(875);
+			p1.shot();
+			
+			freeze=true;
 			if(p1.getX()<=750) {
 				b1.far();
 				far = true;
 				System.out.println("far");
-				freeze=true;
+				
 			}
 			
 			if(p1.getX()>750) {
@@ -194,17 +199,15 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 					b1.close();
 					close=true;
 					System.out.println("close");
-					freeze=true;
 				}else {
 					b1.normal();
 					close=true;
 				System.out.println("normal");
-				freeze=true;
 				}
 				
 			}
 		}
-		
+		}
 		
 		
 	}
@@ -213,12 +216,17 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	public void keyReleased(KeyEvent arg32) {
 		// TODO Auto-generated method stub
 		if(arg32.getKeyCode()==65) {
-			p1.moveStop();
-			b1.moveStop();
+			if(freeze==false) {
+				p1.moveStop();
+				b1.moveStop();
+			}
+			
 		}
 		if(arg32.getKeyCode()==68) {
-			p1.moveStop();
-			b1.moveStop();
+			if(freeze==false) {
+				p1.moveStop();
+				b1.moveStop();
+			}
 		}
 	}
 

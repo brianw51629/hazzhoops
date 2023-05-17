@@ -14,7 +14,6 @@ public class Ball {
 	private int vx, vy;
 	private Image img;
 	private AffineTransform tx;
-	private int newV = 0;
 	private boolean shot = false;
 	private boolean out = false;
 	private boolean reset = false;
@@ -56,7 +55,7 @@ public class Ball {
 		
 		
 		
-		
+		System.out.println(vx + " " + vy);
 			if(y<=400) {
 				vy=0;
 				vx=15;
@@ -68,13 +67,14 @@ public class Ball {
 				}
 			}
 			if(y>1000&&shot) {
+				reset = true;
 				y=875;
 				shot = false;
 				out = false;
 				x = 665;
 				y = 875;
 				vy=20;
-				reset = true;
+				
 			}
 			if(y>1000) {
 				y=875;
@@ -92,9 +92,7 @@ public class Ball {
 		
 	}
 
-	public void setNewV(int grabbed) {
-		newV=(grabbed+1)*2;
-	}
+	
 	
 	public void resetShot(boolean set) {
 		reset = set;
@@ -103,12 +101,7 @@ public class Ball {
 		return reset;
 	}
 	public void reset() {
-		x = (int)(Math.random() * 751);
-		y = 200;
-		vx = 3;
-		vy = 3;
-		vx+=newV;
-		vy += newV;
+		
 	}
 	
 	private void update() {
@@ -174,12 +167,17 @@ public class Ball {
 	public int getY() {
 		return y;
 	}
-	
+	public void setY(int tempY) {
+		y=tempY;
+	}
 	public int getVX() {
 		return vx;
 	}
 	public void setVX(int setter) {
 		vx = setter;
+	}
+	public void setVY(int setter) {
+		vy = setter;
 	}
 	public boolean hit(Rectangle h) {
 		
