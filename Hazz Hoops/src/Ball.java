@@ -17,6 +17,7 @@ public class Ball {
 	private int newV = 0;
 	private boolean shot = false;
 	private boolean out = false;
+	private boolean reset = false;
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
 
@@ -25,7 +26,7 @@ public class Ball {
 					// use your variables
 		x = 665;
 		y = 875;
-
+		vy=20;
 	}
 
 	public Ball(String fileName) {
@@ -66,10 +67,21 @@ public class Ball {
 					vx=0;
 				}
 			}
+			if(y>1000&&shot) {
+				y=875;
+				shot = false;
+				out = false;
+				x = 665;
+				y = 875;
+				vy=20;
+				reset = true;
+			}
 			if(y>1000) {
 				y=875;
-				
+				shot = false;
+				out = false;
 			}
+			
 		
 		
 			g.setColor(Color.black);
@@ -84,7 +96,12 @@ public class Ball {
 		newV=(grabbed+1)*2;
 	}
 	
-	
+	public void resetShot(boolean set) {
+		reset = set;
+	}
+	public boolean getReset() {
+		return reset;
+	}
 	public void reset() {
 		x = (int)(Math.random() * 751);
 		y = 200;

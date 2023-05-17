@@ -33,7 +33,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
 	private int points;
-	private boolean bang = false;
+	private boolean far = false;
+	private boolean close = false;
+	private boolean freeze = false;
 	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10);
 	
 	public void paint(Graphics g) {
@@ -49,12 +51,31 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		g.setColor(Color.black);
 		g.drawRect(1450 , 530, 60, 10 );
 
-			if(b1.hit(basket1)&&bang) {
-				points++;
+			if(b1.hit(basket1)&&far) {
+				points+=3;
 				System.out.println(points);
-				bang=false;
+				far=false;
+				p1.reset();
 			}
-		
+			if(b1.hit(basket1)&&close) {
+				points+=2;
+				System.out.println(points);
+				close=false;
+				p1.reset();
+			}
+			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
+			g.setFont(plainFont);
+			g.setColor(new Color(Color.white.getBlue()));
+			g.drawString("Score: "+points, 800, 100);
+			if(b1.getReset()) {
+				freeze=false;
+				b1.resetShot(false);
+			}
+			
+			
+			
+			
+			
 		
 	}
 	
@@ -145,7 +166,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		System.out.println(arg32.getKeyCode());
+		
+		if(freeze==false) {
+		
+		
 		if(arg32.getKeyCode()==65) {
 			p1.moveLeft();
 			b1.moveLeft(p1.getSpeed());
@@ -154,21 +178,28 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			p1.moveRight();
 			b1.moveRight(p1.getSpeed());
 		}
+		}
 		if(arg32.getKeyCode()==87) {
 			p1.shot();
+			p1.moveStop();
 			if(p1.getX()<=750) {
 				b1.far();
-				bang = true;
+				far = true;
 				System.out.println("far");
+				freeze=true;
 			}
 			
 			if(p1.getX()>750) {
 				if(p1.getX()>1050) {
 					b1.close();
+					close=true;
 					System.out.println("close");
+					freeze=true;
 				}else {
 					b1.normal();
+					close=true;
 				System.out.println("normal");
+				freeze=true;
 				}
 				
 			}

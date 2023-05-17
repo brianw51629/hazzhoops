@@ -103,8 +103,8 @@ public class Character {
 	
 	
 	public void reset() {
-		x = (int)(Math.random() * 751);
-		y = 200;
+		x=500;
+		y=675;
 	}
 	
 	public void moveLeft() {
