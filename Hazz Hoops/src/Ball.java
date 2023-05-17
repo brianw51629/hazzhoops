@@ -66,6 +66,10 @@ public class Ball {
 					vx=0;
 				}
 			}
+			if(y>1000) {
+				y=875;
+				
+			}
 		
 		
 			g.setColor(Color.black);
@@ -123,6 +127,9 @@ public class Ball {
 		//System.out.println("worked");
 	}
 	
+	
+	
+	
 	public void far() {
 		vx=20;
 		vy=-20;
@@ -171,7 +178,7 @@ public class Ball {
 		
 		if(h.intersects(ballHitbox)) {
 			
-			System.out.println("SCORE");
+			//System.out.println("SCORE");
 			return true;
 		}
 	
