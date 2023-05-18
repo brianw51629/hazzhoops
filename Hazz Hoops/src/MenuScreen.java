@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 public class MenuScreen extends Background {
 	
 	public MenuScreen(){
-		super("HomeScreen.png");
+		super("MenuScreen.png");
 	}
 	
 	

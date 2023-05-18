@@ -33,46 +33,63 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Ball b1 = new Ball();
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
+	MenuScreen ms = new MenuScreen();
 	private int points;
 	private boolean far = false;
 	private boolean close = false;
 	private boolean freeze = false;
 	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10);
+	boolean GameStart = false;
+	boolean HighScore = false;
+	
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		bckg.paint(g);
-		h1.paint(g);
-		h2.paint(g);
-		p1.paint(g);
-		p2.paint(g);
-		b1.paint(g); 
-		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
-		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
-		 
-		g.setColor(Color.black);
-		g.drawRect(1450 , 530, 60, 10 );
-
-			if(b1.hit(basket1)&&far) {
-				points+=3;
-				System.out.println(points);
-				far=false;
-				p1.reset();
-			}
-			if(b1.hit(basket1)&&close) {
-				points+=2;
-				System.out.println(points);
-				close=false;
-				p1.reset();
-			}
+		
+		
+		ms.paint(g);
+		
+		if(GameStart) {
+			bckg.paint(g);
+			h1.paint(g);
+			h2.paint(g);
+			p1.paint(g);
+			p2.paint(g);
+			b1.paint(g); 
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
 			g.setFont(plainFont);
 			g.setColor(new Color(Color.white.getBlue()));
 			g.drawString("Score: "+points, 800, 100);
-			if(b1.getReset()) {
-				freeze=false;
-				b1.resetShot(false);
-			}
+		}
+		if(HighScore) {
+			g.drawRect(0, 0, 1000, 2000);
+		}
+		
+		
+		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
+		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
+		
+		/*
+		g.setColor(Color.black);
+		g.drawRect(1450 , 530, 60, 10 );
+		*/
+		
+		if(b1.hit(basket1)&&far) {
+			points+=3;
+			System.out.println(points);
+			far=false;
+			p1.reset();
+		}
+		if(b1.hit(basket1)&&close) {
+			points+=2;
+			System.out.println(points);
+			close=false;
+			p1.reset();
+		}
+		if(b1.getReset()) {
+			freeze=false;
+			b1.resetShot(false);
+		}
 			
 			
 			
@@ -148,7 +165,13 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		
+		if(ms.highscore(arg0)){
+			GameStart = false;
+			HighScore = true;
+		}
+		if(ms.play(arg0)) {
+			GameStart = true;
+		}
 			
 				
 	}
