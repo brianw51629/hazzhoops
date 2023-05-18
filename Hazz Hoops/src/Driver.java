@@ -28,7 +28,8 @@ import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
 	Gym bckg = new Gym();
-	Balanced p1 = new Balanced(50,50,20,50);
+	Balanced p1 = new Balanced(50,50,20,50,1);
+	Balanced p2 = new Balanced(50,50,20,50,2);
 	Ball b1 = new Ball();
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
@@ -44,6 +45,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		h1.paint(g);
 		h2.paint(g);
 		p1.paint(g);
+		p2.paint(g);
 		b1.paint(g); 
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
@@ -166,7 +168,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		
+		System.out.println(arg32.getKeyCode());
 		if(freeze==false) {
 		
 		
@@ -188,7 +190,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			freeze=true;
 			if(p1.getX()<=750) {
-				b1.far();
+				b1.rightfar();
 				far = true;
 				System.out.println("far");
 				
@@ -196,11 +198,11 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			if(p1.getX()>750) {
 				if(p1.getX()>1050) {
-					b1.close();
+					b1.rightclose();
 					close=true;
 					System.out.println("close");
 				}else {
-					b1.normal();
+					b1.rightnormal();
 					close=true;
 				System.out.println("normal");
 				}
@@ -208,6 +210,47 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 		}
+		if(freeze==false) {
+			
+			
+			if(arg32.getKeyCode()==37) {
+				p2.moveLeft();
+				b1.moveLeft(p1.getSpeed());
+			}
+			if(arg32.getKeyCode()==39) {
+				p2.moveRight();
+				b1.moveRight(p1.getSpeed());
+			}
+			
+			if(arg32.getKeyCode()==38) {
+				p2.moveStop();
+				b1.moveStop();
+				b1.setVY(0);
+				b1.setY(875);
+				p2.shot();
+				
+				freeze=true;
+				if(p2.getX()<=750) {
+					b1.rightfar();
+					far = true;
+					System.out.println("far");
+					
+				}
+				
+				if(p2.getX()>750) {
+					if(p2.getX()>1050) {
+						b1.rightclose();
+						close=true;
+						System.out.println("close");
+					}else {
+						b1.rightnormal();
+						close=true;
+					System.out.println("normal");
+					}
+					
+				}
+			}
+			}
 		
 		
 	}

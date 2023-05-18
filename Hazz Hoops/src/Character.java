@@ -21,6 +21,7 @@ public class Character {
 	private int shoot;
 	private int speed;
 	private int steal;
+	private int player;
 	public Character() {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
@@ -32,27 +33,34 @@ public class Character {
 		shoot=50;
 		speed=10;
 		steal=50;
+		player=0;
 		 // initialize the location of the image
 					// use your variables
 		
 	}
 	
 	
-	public Character(int bl, int sh, int sp, int st) {
+	public Character(int bl, int sh, int sp, int st, int pl) {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
 		tx = AffineTransform.getTranslateInstance(x, y);
 		
-		x=500;
-		y=675;
+		
 		vx=0;
 		vy=0;
 		block=bl;
 		shoot=sh;
 		speed=sp;
 		steal=st;
-		 // initialize the location of the image
-					// use your variables
+		player=pl;
+		y=675;
+		if(player==1) {
+			x=500;
+		}
+		if(player==2) {
+			x=900;
+		}
+		
 		
 	}
 

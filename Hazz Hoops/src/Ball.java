@@ -14,8 +14,8 @@ public class Ball {
 	private int vx, vy;
 	private Image img;
 	private AffineTransform tx;
-	private boolean shot = false;
-	private boolean out = false;
+	private boolean rightshot = false;
+	private boolean rightout = false;
 	private boolean reset = false;
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
@@ -55,22 +55,21 @@ public class Ball {
 		
 		
 		
-		System.out.println(vx + " " + vy);
 			if(y<=400) {
 				vy=0;
 				vx=15;
 			}
-			if(x>1350&&shot) {
+			if(x>1350&&rightshot) {
 				vy=20;
 				if(y>525) {
 					vx=0;
 				}
 			}
-			if(y>1000&&shot) {
+			if(y>1000&&rightshot) {
 				reset = true;
 				y=875;
-				shot = false;
-				out = false;
+				rightshot = false;
+				rightout = false;
 				x = 665;
 				y = 875;
 				vy=20;
@@ -78,8 +77,8 @@ public class Ball {
 			}
 			if(y>1000) {
 				y=875;
-				shot = false;
-				out = false;
+				rightshot = false;
+				rightout = false;
 			}
 			
 		
@@ -100,14 +99,9 @@ public class Ball {
 	public boolean getReset() {
 		return reset;
 	}
-	public void reset() {
-		
-	}
 	
-	private void update() {
-		tx.setToTranslation(x, y);
-		tx.scale(.5, .5);
-	}
+	
+	
 
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
@@ -140,25 +134,25 @@ public class Ball {
 	
 	
 	
-	public void far() {
+	public void rightfar() {
 		vx=20;
 		vy=-20;
-		shot=true;
+		rightshot=true;
 	}
-	public void normal() {
+	public void rightnormal() {
 		vx=20;
 		vy=-40;
-		shot=true;
+		rightshot=true;
 	}
-	public void close() {
+	public void rightclose() {
 		vx=5;
 		vy=-80;
-		shot=true;
+		rightshot=true;
 	}
-	public void out() {
+	public void rightout() {
 		vx=30;
 		vy=0;
-		out=true;
+		rightout=true;
 	}
 	
 	public int getX() {
