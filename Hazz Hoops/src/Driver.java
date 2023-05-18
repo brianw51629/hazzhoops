@@ -294,6 +294,19 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.moveStop();
 			}
 		}
+		if(arg32.getKeyCode()==37) {
+			if(freeze==false) {
+				p2.moveStop();
+				b1.moveStop();
+			}
+			
+		}
+		if(arg32.getKeyCode()==39) {
+			if(freeze==false) {
+				p2.moveStop();
+				b1.moveStop();
+			}
+		}
 	}
 
 	@Override
