@@ -110,9 +110,17 @@ public class Character {
 	}
 	
 	
-	public void reset() {
-		x=500;
+	public void reset(int pl) {
 		y=675;
+		if(pl==1) {
+			x=500;
+		}
+		if(pl==2) {
+			x=900;
+		}
+		
+		
+		
 	}
 	
 	public void moveLeft() {
