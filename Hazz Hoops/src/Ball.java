@@ -16,6 +16,8 @@ public class Ball {
 	private AffineTransform tx;
 	private boolean rightshot = false;
 	private boolean rightout = false;
+	private boolean leftshot = false;
+	private boolean leftout = false;
 	private boolean reset = false;
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
@@ -57,7 +59,13 @@ public class Ball {
 		
 			if(y<=400) {
 				vy=0;
-				vx=15;
+				if(rightshot) {
+					vx=15;
+				}
+				if(leftshot) {
+					vx=-15;
+				}
+				
 			}
 			if(x>1350&&rightshot) {
 				vy=20;
@@ -75,10 +83,28 @@ public class Ball {
 				vy=20;
 				
 			}
+			if(x<400&&leftshot) {
+				vy=20;
+				if(y>525) {
+					vx=0;
+				}
+			}
+			if(y>1000&&leftshot) {
+				reset = true;
+				y=875;
+				leftshot = false;
+				leftout = false;
+				x = 665;
+				y = 875;
+				vy=20;
+				
+			}
 			if(y>1000) {
 				y=875;
 				rightshot = false;
 				rightout = false;
+				leftshot = false;
+				leftout = false;
 			}
 			
 		
@@ -153,6 +179,28 @@ public class Ball {
 		vx=30;
 		vy=0;
 		rightout=true;
+	}
+	
+	
+	public void leftfar() {
+		vx=-20;
+		vy=-20;
+		leftshot=true;
+	}
+	public void leftnormal() {
+		vx=-20;
+		vy=-40;
+		leftshot=true;
+	}
+	public void leftclose() {
+		vx=-5;
+		vy=-80;
+		leftshot=true;
+	}
+	public void leftout() {
+		vx=-30;
+		vy=0;
+		leftout=true;
 	}
 	
 	public int getX() {
