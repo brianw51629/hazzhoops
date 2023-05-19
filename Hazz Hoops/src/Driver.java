@@ -169,14 +169,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		if(ms.highscore(arg0)){
-			GameStart = false;
+		
+		//if High Score button is pressed
+		if(ms.highscore(arg0) && GameStart == false){
 			HighScore = true;
 		}
-		if(ms.play(arg0)) {
+		//if Menu Screen button is pressed
+		if(ms.play(arg0) && HighScore == false) {
 			GameStart = true;
 		}
-			
+		
+		
+		
+		
+		
 		if(ps.changeScreen(arg0)) {
 			if(p1Select == true) {
 				
