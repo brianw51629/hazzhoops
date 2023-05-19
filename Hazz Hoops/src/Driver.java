@@ -41,6 +41,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10);
 	boolean GameStart = false;
 	boolean HighScore = false;
+	Select ps = new Select();
+	boolean p1Select = false; 
+	boolean p2Select = false;
 	
 	
 	public void paint(Graphics g) {
@@ -91,7 +94,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			b1.resetShot(false);
 		}
 			
-			
+		
+		
 			
 			
 			
@@ -173,6 +177,17 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			GameStart = true;
 		}
 			
+		if(ps.changeScreen(arg0)) {
+			if(p1Select == true) {
+				
+				p2Select = true;
+			}
+			p1Select = true;
+			
+			
+		}
+		
+		
 				
 	}
 	
@@ -291,6 +306,19 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(arg32.getKeyCode()==68) {
 			if(freeze==false) {
 				p1.moveStop();
+				b1.moveStop();
+			}
+		}
+		if(arg32.getKeyCode()==37) {
+			if(freeze==false) {
+				p2.moveStop();
+				b1.moveStop();
+			}
+			
+		}
+		if(arg32.getKeyCode()==39) {
+			if(freeze==false) {
+				p2.moveStop();
 				b1.moveStop();
 			}
 		}
