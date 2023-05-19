@@ -18,7 +18,7 @@ public class MenuScreen extends Background {
 		Rectangle m = new Rectangle(mouse.getX(), mouse.getY(), 30, 30);
 		
 		//button
-		Rectangle s1 = new Rectangle(450, 860, 899, 105);
+		Rectangle s1 = new Rectangle(450, 800, 899, 140);
 		if(m.intersects(s1)) {
 			return true;
 		}
