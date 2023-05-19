@@ -35,17 +35,21 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
 	MenuScreen ms = new MenuScreen();
-	private int points;
+	private int points1;
+	private int points2;
 	private int rand = (int)(Math.random()*2);
 	private boolean far = false;
 	private boolean close = false;
 	private boolean freeze = false;
-	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10);
+	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10); 
+	Rectangle basket2 = new Rectangle(300 , 530, 60, 10);
 	boolean GameStart = false;
 	boolean HighScore = false;
 	Select ps = new Select();
 	boolean p1Select = false; 
 	boolean p2Select = false;
+	boolean p1ball = false;
+	boolean p2ball = false;
 	
 	
 	public void paint(Graphics g) {
@@ -69,7 +73,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
 			g.setFont(plainFont);
 			g.setColor(new Color(Color.white.getBlue()));
-			g.drawString("Score: "+points, 800, 100);
+			g.drawString("Score: "+points1, 600, 100);
+			g.drawString("Score: "+points2, 1000, 100);
 		}
 		if(HighScore) {
 			g.drawRect(0, 0, 1000, 2000);
@@ -79,22 +84,38 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		//Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		//Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 		
-		/*
+		
 		g.setColor(Color.black);
-		g.drawRect(1450 , 530, 60, 10 );
-		*/
+		g.drawRect(300 , 530, 60, 10 );
+		
 		
 		if(b1.hit(basket1)&&far) {
-			points+=3;
-			System.out.println(points);
+			points1+=3;
+			System.out.println(points1);
 			far=false;
-			p1.reset();
+			p1.reset(1);
+			p2.reset(2);
 		}
 		if(b1.hit(basket1)&&close) {
-			points+=2;
-			System.out.println(points);
+			points1+=2;
+			System.out.println(points1);
 			close=false;
-			p1.reset();
+			p1.reset(1);
+			p2.reset(2);
+		}
+		if(b1.hit(basket2)&&far) {
+			points2+=3;
+			System.out.println(points2);
+			far=false;
+			p1.reset(1);
+			p2.reset(2);
+		}
+		if(b1.hit(basket2)&&close) {
+			points2+=2;
+			System.out.println(points2);
+			close=false;
+			p1.reset(1);
+			p2.reset(2);
 		}
 		if(b1.getReset()) {
 			freeze=false;
@@ -266,11 +287,11 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			if(arg32.getKeyCode()==37) {
 				p2.moveLeft();
-				b1.moveLeft(p1.getSpeed());
+				b1.moveLeft(p2.getSpeed());
 			}
 			if(arg32.getKeyCode()==39) {
 				p2.moveRight();
-				b1.moveRight(p1.getSpeed());
+				b1.moveRight(p2.getSpeed());
 			}
 			
 			if(arg32.getKeyCode()==38) {
@@ -281,20 +302,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				p2.shot();
 				
 				freeze=true;
-				if(p2.getX()<=750) {
-					b1.rightfar();
+				if(p2.getX()>1050) {
+					b1.leftfar();
 					far = true;
 					System.out.println("far");
 					
 				}
 				
-				if(p2.getX()>750) {
-					if(p2.getX()>1050) {
-						b1.rightclose();
+				if(p2.getX()<1050) {
+					if(p2.getX()<250) {
+						b1.leftclose();
 						close=true;
 						System.out.println("close");
 					}else {
-						b1.rightnormal();
+						b1.leftnormal();
 						close=true;
 					System.out.println("normal");
 					}
