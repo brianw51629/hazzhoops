@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener  {
 
 	Gym bckg = new Gym();
+	OutsideCourt obckg = new OutsideCourt();
 	Balanced p1 = new Balanced(50,50,20,50,1);
 	Balanced p2 = new Balanced(50,50,20,50,2);
 	Ball b1 = new Ball();
@@ -35,6 +36,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Hoop h2 = new Hoop("HoopRight.png");
 	MenuScreen ms = new MenuScreen();
 	private int points;
+	private int rand = (int)(Math.random()*2);
 	private boolean far = false;
 	private boolean close = false;
 	private boolean freeze = false;
@@ -49,11 +51,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
-		
 		ms.paint(g);
 		
 		if(GameStart) {
-			bckg.paint(g);
+			//randomly selects which gym to choose
+			if(rand == 0) {
+				bckg.paint(g);
+			}else {
+				obckg.paint(g);
+			}
+			
 			h1.paint(g);
 			h2.paint(g);
 			p1.paint(g);
