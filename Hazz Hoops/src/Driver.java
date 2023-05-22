@@ -86,7 +86,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		
 		
 		g.setColor(Color.black);
-		g.drawRect(300 , 530, 60, 10 );
+		//g.drawRect(300 , 530, 60, 10 );
 		
 		
 		if(b1.hit(basket1)&&far) {

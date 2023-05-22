@@ -28,7 +28,7 @@ public class Character {
 		tx = AffineTransform.getTranslateInstance(x, y);
 		
 		x=500;
-		y=675;
+		y=550;
 		block=50;
 		shoot=50;
 		speed=10;
@@ -53,7 +53,7 @@ public class Character {
 		speed=sp;
 		steal=st;
 		player=pl;
-		y=675;
+		y=550;
 		if(player==1) {
 			x=500;
 		}
@@ -72,7 +72,7 @@ public class Character {
 					// use your variables
 		
 		x = 500;
-		y = 470;
+		y = 550;
 		vx=0;
 		vy=0;
 	}
@@ -90,12 +90,12 @@ public class Character {
 		//update();
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));
-		if(y<=650) {
+		if(y<=525) {
 			vy=10;
 		}
-		if(y>675) {
+		if(y>550) {
 			vy=0;
-			y=675;
+			y=550;
 		}
 		x+=vx;
 		y+=vy;

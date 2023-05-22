@@ -26,8 +26,8 @@ public class Ball {
 		init(x, y); // initialize the location of the image
 					// use your variables
 		x = 665;
-		y = 875;
-		vy=20;
+		y = 705;
+		vy=15;
 	}
 
 	public Ball(String fileName) {
@@ -57,7 +57,7 @@ public class Ball {
 		
 		
 		
-			if(y<=400) {
+			if(y<=200) {
 				vy=0;
 				if(rightshot) {
 					vx=15;
@@ -67,40 +67,41 @@ public class Ball {
 				}
 				
 			}
-			if(x>1350&&rightshot) {
+			if(x>1300&&rightshot) {
 				vy=20;
-				if(y>525) {
+				if(y>400) {
 					vx=0;
 				}
 			}
-			if(y>1000&&rightshot) {
+			if(y>800&&rightshot) {
 				reset = true;
-				y=875;
+				y=705;
 				rightshot = false;
 				rightout = false;
 				x = 665;
-				y = 875;
+				y = 705;
 				vy=20;
 				
 			}
-			if(x<400&&leftshot) {
+			if(x<450&&leftshot) {
 				vy=20;
-				if(y>525) {
+				if(y>400) {
 					vx=0;
 				}
 			}
-			if(y>1000&&leftshot) {
+			if(y>800&&leftshot) {
 				reset = true;
-				y=875;
+				y=705;
 				leftshot = false;
 				leftout = false;
 				x = 665;
-				y = 875;
+				y = 705;
 				vy=20;
 				
 			}
-			if(y>1000) {
-				y=875;
+			if(y>800) {
+				y=705;
+				vy=15;
 				rightshot = false;
 				rightout = false;
 				leftshot = false;
@@ -110,7 +111,7 @@ public class Ball {
 		
 		
 			g.setColor(Color.black);
-			g.drawRect( x + 2, y , 45, 45);
+			//g.drawRect( x + 2, y , 45, 45);
 		x+=vx;
 		y+=vy;
 		//g.drawRect(x+20,y,75,75);
@@ -161,21 +162,25 @@ public class Ball {
 	
 	
 	public void rightfar() {
+		y=705;
 		vx=20;
 		vy=-20;
 		rightshot=true;
 	}
 	public void rightnormal() {
+		y=705;
 		vx=20;
 		vy=-40;
 		rightshot=true;
 	}
 	public void rightclose() {
+		y=705;
 		vx=5;
 		vy=-80;
 		rightshot=true;
 	}
 	public void rightout() {
+		y=705;
 		vx=30;
 		vy=0;
 		rightout=true;
@@ -183,21 +188,25 @@ public class Ball {
 	
 	
 	public void leftfar() {
+		y=705;
 		vx=-20;
 		vy=-20;
 		leftshot=true;
 	}
 	public void leftnormal() {
+		y=705;
 		vx=-20;
 		vy=-40;
 		leftshot=true;
 	}
 	public void leftclose() {
+		y=705;
 		vx=-5;
 		vy=-80;
 		leftshot=true;
 	}
 	public void leftout() {
+		y=705;
 		vx=-30;
 		vy=0;
 		leftout=true;

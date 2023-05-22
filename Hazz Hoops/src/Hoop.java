@@ -22,7 +22,7 @@ public class Hoop {
 		 // initialize the location of the image
 					// use your variables
 
-		y=375;
+		y=240;
 
 	}
  
@@ -30,7 +30,7 @@ public class Hoop {
 		img = getImage("/imgs/" + fileName); // load the image for Tree
 
 		tx = AffineTransform.getTranslateInstance(x, y);
-		y=375;
+		y=240;
 		x=1200;
 		// initialize the location of the image
 					// use your variables
