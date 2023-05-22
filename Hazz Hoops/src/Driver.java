@@ -37,7 +37,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	MenuScreen ms = new MenuScreen();
 	private int points1;
 	private int points2;
-	private int rand = (int)(Math.random()*2);
+	private int rand = (int)(Math.random()*2+1);
 	private boolean far = false;
 	private boolean close = false;
 	private boolean freeze = false;
@@ -52,7 +52,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean p2ball = false;
 	boolean gbox1 = false;
 	boolean gbox2 = false;
-	boolean gbox3 = false;
+	boolean gbox3 = false; 
+	boolean gameStart = false;
+	int picks = 0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -77,15 +79,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				g.fillRect(1340, 760, 210, 140);
 			}
 			
-			
-			
+			if(picks > 1) {
+				gameStart = true;
+			}
+		}
 		
-			
 		
-			/*
-			if(rand == 0) {
+		if(gameStart) {
+			if(rand == 1) {
 				bckg.paint(g);
-			}else {
+			}else if(rand == 2){
 				obckg.paint(g);
 			}
 			
@@ -99,8 +102,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			g.setColor(new Color(Color.white.getBlue()));
 			g.drawString("Score: "+points1, 600, 100);
 			g.drawString("Score: "+points2, 1000, 100);
-			*/
 		}
+		
 		if(HighScore) {
 			g.drawRect(0, 0, 1000, 2000);
 		}
@@ -236,18 +239,21 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(ps.changeScreen(arg0)) {
 			if(ps.isB1()) {
 				gbox1 = true;
+				picks++;
 			}
 		}
 		
 		if(ps.changeScreen(arg0)) {
 			if(ps.isB2()) {
 				gbox2 = true;
+				picks++;
 			}
 		}
 		
 		if(ps.changeScreen(arg0)) {
 			if(ps.isB3()) {
 				gbox3 = true;
+				picks++;
 			}
 		}
 		
