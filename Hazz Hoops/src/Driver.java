@@ -43,22 +43,46 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	private boolean freeze = false;
 	Rectangle basket1 = new Rectangle(1450 , 530, 60, 10); 
 	Rectangle basket2 = new Rectangle(300 , 530, 60, 10);
-	boolean GameStart = false;
+	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
 	boolean p1Select = false; 
 	boolean p2Select = false;
 	boolean p1ball = false;
 	boolean p2ball = false;
-	
+	boolean gbox1 = false;
+	boolean gbox2 = false;
+	boolean gbox3 = false;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
 		ms.paint(g);
 		
-		if(GameStart) {
+		
+		
+		
+		if(PlayerSelect) {
 			//randomly selects which gym to choose
+			
+			ps.paint(g);
+			g.setColor(Color.green);
+			if(gbox1) {
+				g.fillRect(265, 760, 210, 140);
+			}
+			if(gbox2) {
+				g.fillRect(795, 760, 210, 140);
+			}
+			if(gbox3) {
+				g.fillRect(1340, 760, 210, 140);
+			}
+			
+			
+			
+		
+			
+		
+			/*
 			if(rand == 0) {
 				bckg.paint(g);
 			}else {
@@ -75,6 +99,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			g.setColor(new Color(Color.white.getBlue()));
 			g.drawString("Score: "+points1, 600, 100);
 			g.drawString("Score: "+points2, 1000, 100);
+			*/
 		}
 		if(HighScore) {
 			g.drawRect(0, 0, 1000, 2000);
@@ -121,7 +146,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			freeze=false;
 			b1.resetShot(false);
 		}
-			
+		
+		
 		
 		
 			
@@ -199,15 +225,31 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		
 		
 		//if High Score button is pressed
-		if(ms.highscore(arg0) && GameStart == false){
+		if(ms.highscore(arg0) && PlayerSelect == false){
 			HighScore = true;
 		}
 		//if Menu Screen button is pressed
 		if(ms.play(arg0) && HighScore == false) {
-			GameStart = true;
+			PlayerSelect = true;
 		}
 		
+		if(ps.changeScreen(arg0)) {
+			if(ps.isB1()) {
+				gbox1 = true;
+			}
+		}
 		
+		if(ps.changeScreen(arg0)) {
+			if(ps.isB2()) {
+				gbox2 = true;
+			}
+		}
+		
+		if(ps.changeScreen(arg0)) {
+			if(ps.isB3()) {
+				gbox3 = true;
+			}
+		}
 		
 		
 		

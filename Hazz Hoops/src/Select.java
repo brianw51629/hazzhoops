@@ -5,6 +5,9 @@ import java.awt.event.MouseEvent;
 
 public class Select extends Background {
 	
+	private boolean b1;
+	private boolean b2;
+	private boolean b3;
 	public Select() {
 		
 		
@@ -18,22 +21,86 @@ public class Select extends Background {
 		Rectangle m = new Rectangle(mouse.getX(), mouse.getY(), 30, 30);
 		
 		//add dimensions for buttons
-		Rectangle box1 = new Rectangle();
-		Rectangle box2 = new Rectangle();
-		Rectangle box3 = new Rectangle();
+		Rectangle box1 = new Rectangle(265, 760, 210, 140);
+		Rectangle box2 = new Rectangle(795, 760, 210, 140);
+		Rectangle box3 = new Rectangle(1340, 760, 210, 140);
 		
-		if(m.intersects(box1)) {
+		if(m.intersects(box1) || m.intersects(box2) || m.intersects(box3)) {
 			
 			// display text 
-			
-			
-			
-			// return true
-			return true;
+			if(m.intersects(box1)) {
+				b1 = true;
+			}
+			if(m.intersects(box2)) {
+				b2 = true;
+			}
+			if(m.intersects(box3)) {
+				b3 = true;
+			}
 		}
-				return false;
-		
-		
+		return true;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public boolean isB1() {
+		return b1;
+	}
+
+
+	public void setB1(boolean b1) {
+		this.b1 = b1;
+	}
+
+
+	public boolean isB2() {
+		return b2;
+	}
+
+
+	public void setB2(boolean b2) {
+		this.b2 = b2;
+	}
+
+
+	public boolean isB3() {
+		return b3;
+	}
+
+
+	public void setB3(boolean b3) {
+		this.b3 = b3;
 	}
 	
 	
