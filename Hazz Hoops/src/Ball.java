@@ -27,7 +27,7 @@ public class Ball {
 					// use your variables
 		x = 665;
 		y = 705;
-		vy=15;
+		vy=15;//velocity to get the ball bouncing
 	}
 
 	public Ball(String fileName) {
@@ -56,7 +56,7 @@ public class Ball {
 		tx.scale(0.05, 0.05);
 		
 		
-		
+			//starts the shot arc
 			if(y<=200) {
 				vy=0;
 				if(rightshot) {
@@ -107,7 +107,7 @@ public class Ball {
 				leftshot = false;
 				leftout = false;
 			}
-			
+			//ends shot arc
 		
 		
 			g.setColor(Color.black);
@@ -148,6 +148,7 @@ public class Ball {
 	
 	public void moveStop() {
 		vx=0;
+		//stops ball moving at key released
 	}
 	public void moveLeft(int speed) {
 		vx=-(speed);
@@ -160,7 +161,7 @@ public class Ball {
 	
 	
 	
-	
+	//starts methods for shots from player 1
 	public void rightfar() {
 		y=705;
 		vx=20;
@@ -185,8 +186,8 @@ public class Ball {
 		vy=0;
 		rightout=true;
 	}
-	
-	
+	//ends shot methods for player 1
+	//starts shot methods for player 2
 	public void leftfar() {
 		y=705;
 		vx=-20;
@@ -211,7 +212,7 @@ public class Ball {
 		vy=0;
 		leftout=true;
 	}
-	
+	//ends shot methods for player 2
 	public int getX() {
 		return x;
 	}
@@ -230,7 +231,7 @@ public class Ball {
 	public void setVY(int setter) {
 		vy = setter;
 	}
-	public boolean hit(Rectangle h) {
+	public boolean hit(Rectangle h) {//hitbox for scoring mechanism
 		
 		//represent the mouse as a rectangle
 		

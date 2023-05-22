@@ -257,7 +257,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			p1.moveStop();
 			b1.moveStop();
 			b1.setVY(0);
-			b1.setY(875);
 			p1.shot();
 			
 			freeze=true;
@@ -298,7 +297,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				p2.moveStop();
 				b1.moveStop();
 				b1.setVY(0);
-				b1.setY(875);
 				p2.shot();
 				
 				freeze=true;

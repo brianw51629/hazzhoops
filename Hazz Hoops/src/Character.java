@@ -48,12 +48,15 @@ public class Character {
 		
 		vx=0;
 		vy=0;
+		//start of ratings
 		block=bl;
 		shoot=sh;
 		speed=sp;
 		steal=st;
 		player=pl;
+		//end of ratings
 		y=550;
+		//sets x based on player 1 or 2
 		if(player==1) {
 			x=500;
 		}
@@ -90,6 +93,8 @@ public class Character {
 		//update();
 		g2.drawImage(img, tx, null);
 		g.setColor(new Color(0,0,0));
+		
+		//start of jump going down
 		if(y<=525) {
 			vy=10;
 		}
@@ -97,6 +102,9 @@ public class Character {
 			vy=0;
 			y=550;
 		}
+		//end of jump going down
+		
+		
 		x+=vx;
 		y+=vy;
 		tx.setToTranslation(x, y);
@@ -109,12 +117,14 @@ public class Character {
 		newV=(grabbed+1)*2;
 	}
 	
-	
+	//reset for each player
 	public void reset(int pl) {
-		y=675;
+		y=550;
+		//resets p1
 		if(pl==1) {
 			x=500;
 		}
+		//resets p2
 		if(pl==2) {
 			x=900;
 		}
@@ -125,16 +135,15 @@ public class Character {
 	
 	public void moveLeft() {
 		vx=-(speed);
-		System.out.println("worked");
 	}
 	public void moveRight() {
 		vx=(speed);
-		System.out.println("worked");
 	}
 	
 	
 	
 	public void shot() {
+		//jump
 		vy=-10;
 	}
 	
@@ -142,6 +151,7 @@ public class Character {
 	
 	
 	public void moveStop() {
+		//zeros the velocity for key release
 		vx=0;
 	}
 	
