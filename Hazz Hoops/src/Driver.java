@@ -91,12 +91,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			}else if(rand == 2){
 				obckg.paint(g);
 			}
-			
+			b1.paint(g);
 			h1.paint(g);
 			h2.paint(g);
 			p1.paint(g);
 			p2.paint(g);
-			b1.paint(g); 
+			 
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
 			g.setFont(plainFont);
 			g.setColor(new Color(Color.white.getBlue()));
