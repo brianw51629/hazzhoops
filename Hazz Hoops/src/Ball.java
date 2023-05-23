@@ -193,7 +193,7 @@ public class Ball {
 		vx=-20;
 		vy=-20;
 		leftshot=true;
-	}
+	} 
 	public void leftnormal() {
 		y=705;
 		vx=-20;

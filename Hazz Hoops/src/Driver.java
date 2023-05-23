@@ -55,6 +55,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean gbox3 = false; 
 	boolean gameStart = false;
 	int picks = 0;
+	double timer = 900.0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -100,6 +101,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
 			g.setFont(plainFont);
 			g.setColor(new Color(Color.white.getBlue()));
+			if(gameStart) {
+				g.drawString("Time: "+((int)timer/10), 600, 300);
+				timer-=0.5;
+			}
 			g.drawString("Score: "+points1, 600, 100);
 			g.drawString("Score: "+points2, 1000, 100);
 		}
