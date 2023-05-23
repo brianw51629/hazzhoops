@@ -1,5 +1,3 @@
-
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,8 +20,8 @@ public class Scoreboard {
 		tx = AffineTransform.getTranslateInstance(x, y);
 		 // initialize the location of the image
 					// use your variables
-
-		y=240;
+		x=575;
+		y=-150;
 
 	}
  
@@ -77,4 +75,4 @@ public class Scoreboard {
 }
 
 
-}
+

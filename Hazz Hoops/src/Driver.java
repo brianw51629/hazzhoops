@@ -35,6 +35,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Hoop h1 = new Hoop();
 	Hoop h2 = new Hoop("HoopRight.png");
 	MenuScreen ms = new MenuScreen();
+	Scoreboard s1 = new Scoreboard();
 	private int points1;
 	private int points2;
 	private int rand = (int)(Math.random()*2+1);
@@ -55,7 +56,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean gbox3 = false; 
 	boolean gameStart = false;
 	int picks = 0;
-	double timer = 900.0;
+	double timer = 100.0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -92,6 +93,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			}else if(rand == 2){
 				obckg.paint(g);
 			}
+			s1.paint(g);
 			b1.paint(g);
 			h1.paint(g);
 			h2.paint(g);
@@ -100,13 +102,15 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			 
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
 			g.setFont(plainFont);
-			g.setColor(new Color(Color.white.getBlue()));
+			g.setColor(Color.white);
 			if(gameStart) {
-				g.drawString("Time: "+((int)timer/10), 600, 300);
+				g.drawString("Time: "+((int)timer/10), 750, 100);
+				if(timer>=0) {
 				timer-=0.5;
+				}
 			}
-			g.drawString("Score: "+points1, 600, 100);
-			g.drawString("Score: "+points2, 1000, 100);
+			g.drawString(""+points1, 765, 225);
+			g.drawString(""+points2, 945, 225);
 		}
 		
 		if(HighScore) {
