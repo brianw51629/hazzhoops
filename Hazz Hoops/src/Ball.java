@@ -13,21 +13,25 @@ public class Ball {
 	private int x, y;
 	private int vx, vy;
 	private Image img;
+	private double slope;
 	private AffineTransform tx;
 	private boolean rightshot = false;
 	private boolean rightout = false;
 	private boolean leftshot = false;
 	private boolean leftout = false;
 	private boolean reset = false;
+	
+	
+	
 	public Ball() {
 		img = getImage("/imgs/tempBall.png"); // load the image for Tree
 
 		tx = AffineTransform.getTranslateInstance(x, y);
 		init(x, y); // initialize the location of the image
 					// use your variables
-		x = 665;
+		x = 670;
 		y = 705;
-		vy=15;//velocity to get the ball bouncing
+		vy = 15;//velocity to get the ball bouncing
 	}
 
 	public Ball(String fileName) {
@@ -56,49 +60,56 @@ public class Ball {
 		tx.scale(0.05, 0.05);
 		
 		
-			//starts the shot arc
-			if(y<=200) {
-				vy=0;
-				if(rightshot) {
-					vx=15;
-				}
-				if(leftshot) {
-					vx=-15;
-				}
-				
+			
+		//starts the shot arc
+		/*
+		if (y <= 200) {
+			vy = 0;
+			if (rightshot) {
+				vx = 15;
 			}
-			if(x>1300&&rightshot) {
-				vy=20;
-				if(y>400) {
-					vx=0;
-				}
+			if (leftshot) {
+				vx = -15;
 			}
-			if(y>800&&rightshot) {
-				reset = true;
-				y=705;
-				rightshot = false;
-				rightout = false;
-				x = 665;
-				y = 705;
-				vy=20;
-				
+
+		}
+		if (x > 1300 && rightshot) {
+			vy = 20;
+			if (y > 400) {
+				vx = 0;
 			}
-			if(x<450&&leftshot) {
-				vy=20;
-				if(y>400) {
-					vx=0;
-				}
+		}
+		if (y > 800 && rightshot) {
+			reset = true;
+			y = 705;
+			rightshot = false;
+			rightout = false;
+			x = 665;
+			y = 705;
+			vy = 20;
+
+		}
+		if (x < 450 && leftshot) {
+			vy = 20;
+			if (y > 400) {
+				vx = 0;
 			}
-			if(y>800&&leftshot) {
-				reset = true;
-				y=705;
-				leftshot = false;
-				leftout = false;
-				x = 665;
-				y = 705;
-				vy=20;
-				
-			}
+		}
+		if (y > 800 && leftshot) {
+			reset = true;
+			y = 705;
+			leftshot = false;
+			leftout = false;
+			x = 665;
+			y = 705;
+			vy = 20;
+
+		}
+		*/
+			
+			
+			
+			//reset
 			if(y>800) {
 				y=705;
 				vy=15;
@@ -108,12 +119,13 @@ public class Ball {
 				leftout = false;
 			}
 			//ends shot arc
-		
-		
-			g.setColor(Color.black);
-			//g.drawRect( x + 2, y , 45, 45);
-		x+=vx;
-		y+=vy;
+			
+			
+			
+			
+			x += vx;
+			y += vy;
+			
 		//g.drawRect(x+20,y,75,75);
 		
 	}
@@ -161,11 +173,20 @@ public class Ball {
 	
 	
 	
+	
+	public void Thrown() {
+		vy = (int)slope;
+		vx = 1;
+	}
+	
+	
+	
+	
 	//starts methods for shots from player 1
 	public void rightfar() {
-		y=705;
-		vx=20;
-		vy=-20;
+		//y=705;
+		//vx=20;
+		//vy=-20;
 		rightshot=true;
 	}
 	public void rightnormal() {
@@ -189,9 +210,9 @@ public class Ball {
 	//ends shot methods for player 1
 	//starts shot methods for player 2
 	public void leftfar() {
-		y=705;
-		vx=-20;
-		vy=-20;
+		//y=705;
+		//vx=-20;
+		//vy=-20;
 		leftshot=true;
 	} 
 	public void leftnormal() {

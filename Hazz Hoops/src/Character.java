@@ -142,7 +142,7 @@ public class Character {
 	
 	
 	
-	public void shot() {
+	public void jump() {
 		//jump
 		vy=-10;
 	}
@@ -193,6 +193,8 @@ public class Character {
 	public void setVX(int setter) {
 		vx = setter;
 	}
+	
+	
 	
 	
 	
