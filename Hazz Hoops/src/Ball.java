@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class Ball { 
 	private int x, y;
-	private int vx, vy;
+	private double vx, vy;
 	private Image img;
 	private double slope;
 	private AffineTransform tx;
@@ -111,16 +111,14 @@ public class Ball {
 			
 			//reset
 			if(y>800) {
-				y=705;
-				vy=15;
-				rightshot = false;
-				rightout = false;
-				leftshot = false;
-				leftout = false;
+				y=755;
+				vy=10;
 			}
+			
 			//ends shot arc
-			
-			
+			if(y<200) { //bounce off ceiling (wind bending)
+				vy*=-1;
+			}
 			
 			
 			x += vx;
@@ -129,7 +127,7 @@ public class Ball {
 		//g.drawRect(x+20,y,75,75);
 		
 	}
-
+	
 	
 	
 	public void resetShot(boolean set) {
@@ -174,14 +172,27 @@ public class Ball {
 	
 	
 	
-	public void Thrown() {
-		vy = (int)slope;
-		vx = 1;
+	public void thrown(int pl) {
+		
+		if(pl==1) {
+			slope = 400.0/Math.abs((1400-x));
+			vy = slope*-15;
+			System.out.println(vy);
+			vx = 10;	
+			
+		}
+		if(pl==2) {
+			slope = 400.0/(250-x);
+			vy = slope*-10;
+			System.out.println(vy);
+			vx = 10;	
+		}
+		
 	}
 	
 	
 	
-	
+	/*
 	//starts methods for shots from player 1
 	public void rightfar() {
 		//y=705;
@@ -233,6 +244,9 @@ public class Ball {
 		vy=0;
 		leftout=true;
 	}
+	*/
+	
+	
 	//ends shot methods for player 2
 	public int getX() {
 		return x;
@@ -243,13 +257,13 @@ public class Ball {
 	public void setY(int tempY) {
 		y=tempY;
 	}
-	public int getVX() {
+	public double getVX() {
 		return vx;
 	}
-	public void setVX(int setter) {
+	public void setVX(double setter) {
 		vx = setter;
 	}
-	public void setVY(int setter) {
+	public void setVY(double setter) {
 		vy = setter;
 	}
 	public boolean hit(Rectangle h) {//hitbox for scoring mechanism
@@ -259,7 +273,7 @@ public class Ball {
 		//Rectangle b = new Rectangle(m.getX(),mouse.getY(), 25, 25);
 		
 		
-		//Duck hit box
+		
 		
 		Rectangle ballHitbox = new Rectangle(x + 2, y , 45, 45);
 		
@@ -267,6 +281,7 @@ public class Ball {
 		if(h.intersects(ballHitbox)) {
 			
 			//System.out.println("SCORE");
+			vx=0;
 			return true;
 		}
 	

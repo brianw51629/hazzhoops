@@ -57,28 +57,17 @@ public class Character {
 		//end of ratings
 		y=550;
 		//sets x based on player 1 or 2
-		if(player==1) {
+		if(pl==1) {
 			x=500;
 		}
-		if(player==2) {
+		if(pl==2) {
 			x=900;
 		}
 		
 		
 	}
 
-	public Character(String fileName) {
-		img = getImage("/imgs/" + fileName); // load the image for Tree
-
-		tx = AffineTransform.getTranslateInstance(x, y);
-		init(x, y); // initialize the location of the image
-					// use your variables
-		
-		x = 500;
-		y = 550;
-		vx=0;
-		vy=0;
-	}
+	
 
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
@@ -103,7 +92,12 @@ public class Character {
 			y=550;
 		}
 		//end of jump going down
-		
+		if(x>=1250) {
+			x=1200;
+		}
+		if(x<=275) {
+			x=325;
+		}
 		
 		x+=vx;
 		y+=vy;
@@ -134,6 +128,7 @@ public class Character {
 	}
 	
 	public void moveLeft() {
+		
 		vx=-(speed);
 	}
 	public void moveRight() {

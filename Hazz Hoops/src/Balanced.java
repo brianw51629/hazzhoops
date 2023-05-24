@@ -1,10 +1,10 @@
 
 public class Balanced extends Character {
 		
-	public Balanced(int bl, int sh, int sp, int st,int pl) {
+	public Balanced(int pl) {
 		
 		
-		super(bl, sh, sp, st,pl);
+		super(50, 50, 20, 50, pl);
 		
 		
 	}
