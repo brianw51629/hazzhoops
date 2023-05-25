@@ -251,7 +251,7 @@ public class Ball {
 	}
 	*/
 	
-	
+	 
 	//ends shot methods for player 2
 	public int getX() {
 		return x;
