@@ -42,8 +42,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	//private boolean far = false;
 	//private boolean close = false;
 	private boolean freeze = false;
-	Rectangle basket1 = new Rectangle(1450, 350, 60, 10);
+	Rectangle basket1 = new Rectangle(1450, 400, 60, 10);
 	Rectangle basket2 = new Rectangle(300, 350, 60, 10);
+	Rectangle back1 = new Rectangle(1550, 250, 1, 100);
+	Rectangle back2 = new Rectangle(200, 250, 1, 100);
 	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
@@ -62,7 +64,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-
+		System.out.println(picks);
 		ms.paint(g);
 
 		if (PlayerSelect) {
@@ -73,36 +75,48 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			if (gbox1) {
 				g.fillRect(265, 760, 210, 140);
 				if(picks==1) {
-					Player1 = new Short(1);
+					Player1 = new Balanced(1);
+					Player1.changePicture("/imgs/MediumPlayerDefault.png");
 				}
 				if(picks==2) {
-					Player2 = new Short(2);
+					Player2 = new Balanced(2);
+					Player2.changePicture("/imgs/MediumPlayerDefault.png");
 				}
+				ps.setB1(false);
 			}
 			if (gbox2) {
 				g.fillRect(795, 760, 210, 140);
 				if(picks==1) {
-					Player1 = new Balanced(1);
+					Player1 = new Short(1);
+					Player1.changePicture("/imgs/ShortPlayerDefault.png");
+					
 				}
 				if(picks==2) {
-					Player2 = new Balanced(2);
+					Player2 = new Short(2);
+					Player2.changePicture("/imgs/ShortPlayerDefault.png");
+					
 				}
+				ps.setB2(false);
 			}
 			if (gbox3) {
 				g.fillRect(1340, 760, 210, 140);
 				if(picks==1) {
 					Player1 = new Tall(1);
+					Player1.changePicture("/imgs/TallPlayerDefault.png");
 				}
 				if(picks==2) {
 					Player2 = new Tall(2);
+					Player2.changePicture("/imgs/TallPlayerDefault.png");
 				}
+				ps.setB3(false);
 			}
 
 			if (picks > 1) {
 				gameStart = true;
+				PlayerSelect = false;
 			}
 		}
-
+		System.out.println(picks);
 		if (gameStart) {
 			if (rand == 1) {
 				bckg.paint(g);
@@ -129,15 +143,15 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			g.drawString("" + points2, 945, 225);
 		}
 
-		if (HighScore) {
+		if (HighScore&&(!gameStart&&!PlayerSelect)) {
 			g.drawRect(0, 0, 1000, 2000);
 		}
 
 		// Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
 		// Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 
-		g.setColor(Color.black);
-		g.fillRect(1450, 350, 60, 10);
+		g.setColor(Color.blue);
+		g.fillRect(1550, 250, 1, 100);
 		
 		if (b1.hit(basket1)&&shot) {
 			shot=false;
@@ -165,6 +179,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (b1.getReset()) {
 			freeze = false;
 			b1.resetShot(false);
+		}
+		if(b1.hit(back1)) {
+			b1.setVX(-5);
 		}
 		
 
@@ -204,26 +221,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-
-		// if High Score button is pressed
 		if (ms.highscore(arg0) && PlayerSelect == false) {
 			HighScore = true;
 		}
@@ -231,8 +228,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (ms.play(arg0) && HighScore == false) {
 			PlayerSelect = true;
 		}
-
-		if (ps.changeScreen(arg0)) {
+		if(PlayerSelect) {
+			if (ps.changeScreen(arg0)) {
 			if (ps.isB1()) {
 				gbox1 = true;
 				picks++;
@@ -252,7 +249,29 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				picks++;
 			}
 		}
+		}
+	}
 
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+		// if High Score button is pressed
+		
+		
+		/*
 		if (ps.changeScreen(arg0)) {
 			if (Player1Select == true) {
 
@@ -261,6 +280,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Player1Select = true;
 
 		}
+		*/
 
 	}
 
@@ -291,16 +311,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		
 		if (freeze == false) {
 
-			if (arg32.getKeyCode() == 65) {
+			if (arg32.getKeyCode() == 65) {//A button
 				Player1.moveLeft();
 				b1.moveLeft(Player1.getSpeed());
 			}
-			if (arg32.getKeyCode() == 68) {
+			if (arg32.getKeyCode() == 68) {//D button
 				Player1.moveRight();
 				b1.moveRight(Player1.getSpeed());
 			}
 
-			if (arg32.getKeyCode() == 87) {
+			if (arg32.getKeyCode() == 87) {//W button
 				Player1.moveStop();
 				b1.moveStop();
 				//b1.setVY(0);
@@ -319,44 +339,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if (freeze == false) {
 
-			if (arg32.getKeyCode() == 37) {
-				Player2.moveLeft();
-				b1.moveLeft(Player2.getSpeed());
-			}
-			if (arg32.getKeyCode() == 39) {
-				Player2.moveRight();
-				b1.moveRight(Player2.getSpeed());
-			}
-
-			if (arg32.getKeyCode() == 38) {
-				Player2.moveStop();
-				b1.moveStop();
-				b1.setVY(0);
-				Player2.jump();
-				
-				freeze = true;
-				
-				/*
-				if (Player2.getX() > 1050) {
-					//b1.leftfar();
-					//far = true;
-					System.out.println("far");
-
-				}
-
-				if (Player2.getX() < 1050) {
-					if (Player2.getX() < 250) {
-						//b1.leftclose();
-						//close = true;
-					} else {
-						//b1.leftnormal();
-						//close = true;
-					}
-
-				}
-				
-				*/
-			}
+			
 		}
 		
 
@@ -390,6 +373,44 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				Player2.moveStop();
 				b1.moveStop();
 			}
+		}
+		if (arg32.getKeyCode() == 37) {
+			Player2.moveLeft();
+			b1.moveLeft(Player2.getSpeed());
+		}
+		if (arg32.getKeyCode() == 39) {
+			Player2.moveRight();
+			b1.moveRight(Player2.getSpeed());
+		}
+
+		if (arg32.getKeyCode() == 38) {
+			Player2.moveStop();
+			b1.moveStop();
+			b1.setVY(0);
+			Player2.jump();
+			
+			freeze = true;
+			
+			/*
+			if (Player2.getX() > 1050) {
+				//b1.leftfar();
+				//far = true;
+				System.out.println("far");
+
+			}
+
+			if (Player2.getX() < 1050) {
+				if (Player2.getX() < 250) {
+					//b1.leftclose();
+					//close = true;
+				} else {
+					//b1.leftnormal();
+					//close = true;
+				}
+
+			}
+			
+			*/
 		}
 	}
 

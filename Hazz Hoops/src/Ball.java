@@ -12,6 +12,7 @@ import java.net.URL;
 public class Ball { 
 	private int x, y;
 	private double vx, vy;
+	private double ay;
 	private Image img;
 	private double slope;
 	private AffineTransform tx;
@@ -116,13 +117,11 @@ public class Ball {
 			}
 			
 			//ends shot arc
-			if(y<200) { //bounce off ceiling (wind bending)
-				vy*=-1;
-			}
 			
 			
 			x += vx;
 			y += vy;
+			vy += ay;
 			
 		//g.drawRect(x+20,y,75,75);
 		
@@ -174,6 +173,12 @@ public class Ball {
 	
 	public void thrown(int pl) {
 		
+		vy = -20;
+		vx = 10;
+		ay = 0.4;
+		
+		
+		/*
 		if(pl==1) {
 			slope = 400.0/Math.abs((1400-x));
 			vy = slope*-15;
@@ -187,7 +192,7 @@ public class Ball {
 			System.out.println(vy);
 			vx = 10;	
 		}
-		
+		*/
 	}
 	
 	

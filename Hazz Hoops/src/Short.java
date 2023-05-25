@@ -7,6 +7,7 @@ public class Short extends Character {
 		super(25, 75, 30, 75, pl);
 		
 		
+		
 	}
 	
 	

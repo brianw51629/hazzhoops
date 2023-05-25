@@ -43,7 +43,7 @@ public class Character {
 	public Character(int bl, int sh, int sp, int st, int pl) {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
-		tx = AffineTransform.getTranslateInstance(x, y);
+		
 		
 		
 		vx=0;
@@ -55,7 +55,7 @@ public class Character {
 		steal=st;
 		player=pl;
 		//end of ratings
-		y=550;
+		y=600;
 		//sets x based on player 1 or 2
 		if(pl==1) {
 			x=500;
@@ -64,6 +64,9 @@ public class Character {
 			x=900;
 		}
 		
+		tx = AffineTransform.getTranslateInstance(x, y);
+		tx.scale(0.25,0.25);
+		//System.out.println("x is "+x+" and y is "+y);
 		
 	}
 
@@ -71,7 +74,6 @@ public class Character {
 
 	public void changePicture(String newFileName) {
 		img = getImage(newFileName);
-		init(x, y);
 	}
 
 	public void paint(Graphics g) {
@@ -87,9 +89,9 @@ public class Character {
 		if(y<=525) {
 			vy=10;
 		}
-		if(y>550) {
+		if(y>600) {
 			vy=0;
-			y=550;
+			y=600;
 		}
 		//end of jump going down
 		if(x>=1250) {
@@ -102,7 +104,7 @@ public class Character {
 		x+=vx;
 		y+=vy;
 		tx.setToTranslation(x, y);
-		tx.scale(3,3);
+		tx.scale(0.25, 0.25);
 		//g.drawRect(x+20,y,75,75);
 		
 	}
