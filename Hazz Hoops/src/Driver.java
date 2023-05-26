@@ -57,6 +57,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean gbox2 = false;
 	boolean gbox3 = false;
 	boolean gameStart = false;
+	boolean p1Right = false;
+	boolean p2Right = false;
+	boolean p1Left = false;
+	boolean p2Left = false;
 	int picks = 0;
 	double timer = 100.0;
 	boolean shot = false;
@@ -184,7 +188,22 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			b1.setVX(-3);
 		}
 		
-
+		if(p1Right) {
+			Player1.moveRight();
+			b1.moveRight(Player1.getSpeed());
+		}
+		if(p2Right) {
+			Player2.moveRight();
+			b1.moveRight(Player2.getSpeed());
+		}
+		if(p1Left) {
+			Player1.moveLeft();
+			b1.moveLeft(Player1.getSpeed());
+		}
+		if(p2Left) {
+			Player2.moveLeft();
+			b1.moveLeft(Player2.getSpeed());
+		}
 	}
 
 	public Driver() {
@@ -312,14 +331,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (freeze == false) {
 
 			if (arg32.getKeyCode() == 65) {//A button
-				Player1.moveLeft();
-				b1.moveLeft(Player1.getSpeed());
+				p1Left = true;
 			}
 			if (arg32.getKeyCode() == 68) {//D button
-				Player1.moveRight();
-				b1.moveRight(Player1.getSpeed());
+				p1Right = true;
 			}
-
+			
 			if (arg32.getKeyCode() == 87) {//W button
 				Player1.moveStop();
 				b1.moveStop();
@@ -328,9 +345,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.setVY(0.0);
 				b1.setY(755);
 				if(Player1.getX()>1000) {
-					b1.thrown(1,5);
+					b1.thrown(1);
 				}else {
-					b1.thrown(1,10);
+					b1.thrown(1);
 				}
 				
 				freeze = true;
@@ -346,7 +363,42 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			 
 		}
 		if (freeze == false) {
+			if (arg32.getKeyCode() == 37) {
+				p2Left = true;
+			}
+			if (arg32.getKeyCode() == 39) {
+				p2Right = true;
+			}
 
+			if (arg32.getKeyCode() == 38) {
+				Player2.moveStop();
+				b1.moveStop();
+				b1.setVY(0);
+				Player2.jump();
+				
+				freeze = true;
+				
+				/*
+				if (Player2.getX() > 1050) {
+					//b1.leftfar();
+					//far = true;
+					System.out.println("far");
+
+				}
+
+				if (Player2.getX() < 1050) {
+					if (Player2.getX() < 250) {
+						//b1.leftclose();
+						//close = true;
+					} else {
+						//b1.leftnormal();
+						//close = true;
+					}
+
+				}
+				
+				*/
+			}
 			
 		}
 		
@@ -358,6 +410,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// TODO Auto-generated method stub
 		if (arg32.getKeyCode() == 65) {
 			if (freeze == false) {
+				p1Left=false;
 				Player1.moveStop();
 				b1.moveStop();
 			}
@@ -365,12 +418,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if (arg32.getKeyCode() == 68) {
 			if (freeze == false) {
+				p1Right=false;
 				Player1.moveStop();
 				b1.moveStop();
 			}
 		}
 		if (arg32.getKeyCode() == 37) {
 			if (freeze == false) {
+				p2Left = false;
 				Player2.moveStop();
 				b1.moveStop();
 			}
@@ -378,48 +433,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if (arg32.getKeyCode() == 39) {
 			if (freeze == false) {
+				p2Right = false;
 				Player2.moveStop();
 				b1.moveStop();
 			}
 		}
-		if (arg32.getKeyCode() == 37) {
-			Player2.moveLeft();
-			b1.moveLeft(Player2.getSpeed());
-		}
-		if (arg32.getKeyCode() == 39) {
-			Player2.moveRight();
-			b1.moveRight(Player2.getSpeed());
-		}
-
-		if (arg32.getKeyCode() == 38) {
-			Player2.moveStop();
-			b1.moveStop();
-			b1.setVY(0);
-			Player2.jump();
-			
-			freeze = true;
-			
-			/*
-			if (Player2.getX() > 1050) {
-				//b1.leftfar();
-				//far = true;
-				System.out.println("far");
-
-			}
-
-			if (Player2.getX() < 1050) {
-				if (Player2.getX() < 250) {
-					//b1.leftclose();
-					//close = true;
-				} else {
-					//b1.leftnormal();
-					//close = true;
-				}
-
-			}
-			
-			*/
-		}
+		
 	}
 
 	@Override
