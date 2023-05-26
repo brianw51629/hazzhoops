@@ -115,7 +115,7 @@ public class Character {
 	
 	//reset for each player
 	public void reset(int pl) {
-		y=550;
+		y=600;
 		//resets p1
 		if(pl==1) {
 			x=500;

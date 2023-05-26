@@ -14,7 +14,7 @@ public class Ball {
 	private double vx, vy;
 	private double ay;
 	private Image img;
-	private double slope;
+	private double accel = 0.0;
 	private AffineTransform tx;
 	private boolean rightshot = false;
 	private boolean rightout = false;
@@ -114,6 +114,7 @@ public class Ball {
 			if(y>800) {
 				y=755;
 				vy=10;
+				reset=true;
 			}
 			
 			//ends shot arc
@@ -121,7 +122,7 @@ public class Ball {
 			
 			x += vx;
 			y += vy;
-			vy += ay;
+			vy += accel;
 			
 		//g.drawRect(x+20,y,75,75);
 		
@@ -171,11 +172,11 @@ public class Ball {
 	
 	
 	
-	public void thrown(int pl) {
+	public void thrown(int pl,int newVX) {
 		
 		vy = -20;
-		vx = 10;
-		ay = 0.4;
+		vx = newVX;
+		accel = 0.4;
 		
 		
 		/*

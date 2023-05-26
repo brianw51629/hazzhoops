@@ -181,7 +181,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			b1.resetShot(false);
 		}
 		if(b1.hit(back1)) {
-			b1.setVX(-5);
+			b1.setVX(-3);
 		}
 		
 
@@ -325,7 +325,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.moveStop();
 				//b1.setVY(0);
 				Player1.jump();
-				b1.thrown(1);
+				b1.setVY(0.0);
+				b1.setY(755);
+				if(Player1.getX()>1000) {
+					b1.thrown(1,5);
+				}else {
+					b1.thrown(1,10);
+				}
+				
 				freeze = true;
 				shot = true;
 				//far code
@@ -336,6 +343,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			
 			}
+			 
 		}
 		if (freeze == false) {
 
