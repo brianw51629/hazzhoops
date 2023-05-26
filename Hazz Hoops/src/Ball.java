@@ -12,7 +12,7 @@ import java.net.URL;
 public class Ball { 
 	private int x, y;
 	private double vx, vy;
-	private double gravity;
+	private double gravity = 1.5;
 	private Image img;
 	private double accel = 0.0;
 	private AffineTransform tx;
@@ -175,13 +175,19 @@ public class Ball {
 	public void thrown(int pl) {
 		y=750;
 		double Up_Displacement = -550;
-		gravity = 0.4;
 		double Down_Displacement = 180;
 		double Right_Displacement = (1450-x)+40;
+		double Left_Displacement = (x-300);
 		vy = -(Math.sqrt(-2*gravity*Up_Displacement));
 		double Tup = Math.sqrt((-2*Up_Displacement)/gravity);
 		double Tdown = Math.sqrt((2*Down_Displacement)/gravity);
-		vx = Right_Displacement/(Tup+Tdown);
+		if(pl==1) {
+			vx = Right_Displacement/(Tup+Tdown);
+		}
+		if(pl==2) {
+			vx = -(Left_Displacement/(Tup+Tdown));
+		}
+		
 		
 		
 		

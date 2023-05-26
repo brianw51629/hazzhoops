@@ -42,10 +42,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	//private boolean far = false;
 	//private boolean close = false;
 	private boolean freeze = false;
-	Rectangle basket1 = new Rectangle(1450, 400, 60, 10);
-	Rectangle basket2 = new Rectangle(300, 350, 60, 10);
+	Rectangle basket1 = new Rectangle(1450, 375, 80, 10);
+	Rectangle basket2 = new Rectangle(300, 375, 80, 10);
 	Rectangle back1 = new Rectangle(1550, 250, 1, 100);
-	Rectangle back2 = new Rectangle(200, 250, 1, 100);
+	Rectangle back2 = new Rectangle(200, 250, 1, 110);
 	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
@@ -64,6 +64,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	int picks = 0;
 	double timer = 100.0;
 	boolean shot = false;
+	boolean possesion = true;
 	
 
 	public void paint(Graphics g) {
@@ -155,7 +156,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 
 		g.setColor(Color.blue);
-		g.fillRect(1550, 250, 1, 100);
 		
 		if (b1.hit(basket1)&&shot) {
 			shot=false;
@@ -170,13 +170,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Player2.reset(2);
 		}
 		*/
-		if (b1.hit(basket2)) {
+		if (b1.hit(basket2)&&shot) {
 			points2 += 3;
-			Player1.reset(1);
-			Player2.reset(2);
-		}
-		if (b1.hit(basket2)) {
-			points2 += 2;
 			Player1.reset(1);
 			Player2.reset(2);
 		}
@@ -187,22 +182,36 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(b1.hit(back1)) {
 			b1.setVX(-3);
 		}
+		if(b1.hit(back2)) {
+			b1.setVX(-3);
+		}
 		
 		if(p1Right) {
 			Player1.moveRight();
-			b1.moveRight(Player1.getSpeed());
+			if(possesion) {
+				b1.moveRight(Player1.getSpeed());
+			}
+			
 		}
 		if(p2Right) {
 			Player2.moveRight();
-			b1.moveRight(Player2.getSpeed());
+			if(possesion==false) {
+				b1.moveRight(Player2.getSpeed());
+			}
+			
 		}
 		if(p1Left) {
 			Player1.moveLeft();
-			b1.moveLeft(Player1.getSpeed());
+			if(possesion) {
+				b1.moveLeft(Player1.getSpeed());
+			}
+			
 		}
 		if(p2Left) {
 			Player2.moveLeft();
-			b1.moveLeft(Player2.getSpeed());
+			if(possesion==false) {
+				b1.moveLeft(Player2.getSpeed());
+			}
 		}
 	}
 
@@ -342,18 +351,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.moveStop();
 				//b1.setVY(0);
 				Player1.jump();
+				if(possesion) {
 				b1.setVY(0.0);
-				b1.setY(755);
-				if(Player1.getX()>1000) {
-					b1.thrown(1);
-				}else {
-					b1.thrown(1);
-				}
+				b1.thrown(1);
 				
 				freeze = true;
 				shot = true;
 				//far code
-				
+				}
 				
 				//close code
 				
@@ -373,10 +378,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			if (arg32.getKeyCode() == 38) {
 				Player2.moveStop();
 				b1.moveStop();
-				b1.setVY(0);
+				
 				Player2.jump();
 				
-				freeze = true;
+				if(possesion==false) {
+					b1.setVY(0);
+					b1.thrown(2);
+					freeze = true;
+					shot = true;
+				}
+				
 				
 				/*
 				if (Player2.getX() > 1050) {
