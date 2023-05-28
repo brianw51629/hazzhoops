@@ -14,14 +14,10 @@ public class Ball {
 	private double vx, vy;
 	private double gravity = 1.5;
 	private Image img;
-	private double accel = 0.0;
 	private AffineTransform tx;
-	private boolean rightshot = false;
-	private boolean rightout = false;
-	private boolean leftshot = false;
-	private boolean leftout = false;
 	private boolean reset = false;
-	
+	private boolean shot = false;
+	private boolean possesion = true;
 	
 	
 	public Ball() {
@@ -47,7 +43,9 @@ public class Ball {
 		img = getImage(newFileName);
 		init(x, y);
 	}
-
+	public void setPossesion(boolean set) {
+		possesion = set;
+	}
 	public void paint(Graphics g) {
 		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
@@ -62,51 +60,7 @@ public class Ball {
 		
 		
 			
-		//starts the shot arc
-		/*
-		if (y <= 200) {
-			vy = 0;
-			if (rightshot) {
-				vx = 15;
-			}
-			if (leftshot) {
-				vx = -15;
-			}
-
-		}
-		if (x > 1300 && rightshot) {
-			vy = 20;
-			if (y > 400) {
-				vx = 0;
-			}
-		}
-		if (y > 800 && rightshot) {
-			reset = true;
-			y = 705;
-			rightshot = false;
-			rightout = false;
-			x = 665;
-			y = 705;
-			vy = 20;
-
-		}
-		if (x < 450 && leftshot) {
-			vy = 20;
-			if (y > 400) {
-				vx = 0;
-			}
-		}
-		if (y > 800 && leftshot) {
-			reset = true;
-			y = 705;
-			leftshot = false;
-			leftout = false;
-			x = 665;
-			y = 705;
-			vy = 20;
-
-		}
-		*/
+		
 			
 			
 			
@@ -114,9 +68,19 @@ public class Ball {
 			if(y>800) {
 				y=755;
 				vy=10;
-				reset=true;
+				if(shot) {
+					reset=true;
+					shot=false;
+				}
+				
 			}
-			
+			if(reset) {
+				if(possesion) {
+					x = 940;
+				}else if(possesion==false) {
+					x = 670;
+				}
+			}
 			//ends shot arc
 			
 			
@@ -129,7 +93,9 @@ public class Ball {
 	}
 	
 	
-	
+	public void setShot(boolean set){
+		shot = set;
+	}
 	public void resetShot(boolean set) {
 		reset = set;
 	}
@@ -177,7 +143,7 @@ public class Ball {
 		double Up_Displacement = -550;
 		double Down_Displacement = 180;
 		double Right_Displacement = (1450-x)+40;
-		double Left_Displacement = (x-300);
+		double Left_Displacement = (x-250);
 		vy = -(Math.sqrt(-2*gravity*Up_Displacement));
 		double Tup = Math.sqrt((-2*Up_Displacement)/gravity);
 		double Tdown = Math.sqrt((2*Down_Displacement)/gravity);
@@ -218,59 +184,7 @@ public class Ball {
 	
 	
 	
-	/*
-	//starts methods for shots from player 1
-	public void rightfar() {
-		//y=705;
-		//vx=20;
-		//vy=-20;
-		rightshot=true;
-	}
-	public void rightnormal() {
-		y=705;
-		vx=20;
-		vy=-40;
-		rightshot=true;
-	}
-	public void rightclose() {
-		y=705;
-		vx=5;
-		vy=-80;
-		rightshot=true;
-	}
-	public void rightout() {
-		y=705;
-		vx=30;
-		vy=0;
-		rightout=true;
-	}
-	//ends shot methods for player 1
-	//starts shot methods for player 2
-	public void leftfar() {
-		//y=705;
-		//vx=-20;
-		//vy=-20;
-		leftshot=true;
-	} 
-	public void leftnormal() {
-		y=705;
-		vx=-20;
-		vy=-40;
-		leftshot=true;
-	}
-	public void leftclose() {
-		y=705;
-		vx=-5;
-		vy=-80;
-		leftshot=true;
-	}
-	public void leftout() {
-		y=705;
-		vx=-30;
-		vy=0;
-		leftout=true;
-	}
-	*/
+	
 	
 	 
 	//ends shot methods for player 2

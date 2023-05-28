@@ -43,9 +43,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	//private boolean close = false;
 	private boolean freeze = false;
 	Rectangle basket1 = new Rectangle(1450, 375, 80, 10);
-	Rectangle basket2 = new Rectangle(300, 375, 80, 10);
-	Rectangle back1 = new Rectangle(1550, 250, 1, 100);
-	Rectangle back2 = new Rectangle(200, 250, 1, 110);
+	Rectangle basket2 = new Rectangle(250, 375, 80, 10);
+	Rectangle back1 = new Rectangle(1550, 250, 1, 110);
+	Rectangle back2 = new Rectangle(250, 250, 1, 110);
 	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
@@ -71,10 +71,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		super.paintComponent(g);
 		System.out.println(picks);
 		ms.paint(g);
-
+		
 		if (PlayerSelect) {
 			// randomly selects which gym to choose
-
+			
 			ps.paint(g);
 			g.setColor(Color.green);
 			if (gbox1) {
@@ -156,7 +156,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// Font restartFont = new Font("SansSerif", Font.PLAIN,25);
 
 		g.setColor(Color.blue);
-		
+		b1.setPossesion(possesion);
 		if (b1.hit(basket1)&&shot) {
 			shot=false;
 			points1 += 3;
@@ -171,12 +171,18 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		*/
 		if (b1.hit(basket2)&&shot) {
+			shot=false;
 			points2 += 3;
 			Player1.reset(1);
 			Player2.reset(2);
 		}
 		if (b1.getReset()) {
 			freeze = false;
+			if(possesion) {
+				possesion = false;
+			}else if(possesion == false){
+				possesion = true;
+			}
 			b1.resetShot(false);
 		}
 		if(b1.hit(back1)) {
@@ -213,6 +219,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.moveLeft(Player2.getSpeed());
 			}
 		}
+		g.fillRect(250, 375, 80, 10);
+		g.fillRect(250, 250, 1, 110);
 	}
 
 	public Driver() {
@@ -348,6 +356,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			if (arg32.getKeyCode() == 87) {//W button
 				Player1.moveStop();
+				p1Left=false;
+				p1Right=false;
 				b1.moveStop();
 				//b1.setVY(0);
 				Player1.jump();
@@ -357,6 +367,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				
 				freeze = true;
 				shot = true;
+				b1.setShot(true);
 				//far code
 				}
 				
@@ -386,6 +397,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 					b1.thrown(2);
 					freeze = true;
 					shot = true;
+					b1.setShot(true);
 				}
 				
 				
