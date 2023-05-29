@@ -43,9 +43,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	//private boolean close = false;
 	private boolean freeze = false;
 	Rectangle basket1 = new Rectangle(1450, 375, 80, 10);
-	Rectangle basket2 = new Rectangle(250, 375, 80, 10);
+	Rectangle basket2 = new Rectangle(265, 375, 80, 10);
 	Rectangle back1 = new Rectangle(1550, 250, 1, 110);
-	Rectangle back2 = new Rectangle(250, 250, 1, 110);
+	Rectangle back2 = new Rectangle(275, 250, 1, 110);
 	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
@@ -69,7 +69,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(picks);
+		//System.out.println(picks);
 		ms.paint(g);
 		
 		if (PlayerSelect) {
@@ -121,7 +121,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				PlayerSelect = false;
 			}
 		}
-		System.out.println(picks);
+		//System.out.println(picks);
 		if (gameStart) {
 			if (rand == 1) {
 				bckg.paint(g);
@@ -186,16 +186,17 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			b1.resetShot(false);
 		}
 		if(b1.hit(back1)) {
-			b1.setVX(-3);
+			b1.setVX(-5);
 		}
 		if(b1.hit(back2)) {
-			b1.setVX(-3);
+			b1.setVX(-5);
 		}
 		
 		if(p1Right) {
 			Player1.moveRight();
 			if(possesion) {
-				b1.moveRight(Player1.getSpeed());
+				Player1.moveRight();
+				b1.setX(Player1.getX()+165);
 			}
 			
 		}
@@ -209,7 +210,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(p1Left) {
 			Player1.moveLeft();
 			if(possesion) {
-				b1.moveLeft(Player1.getSpeed());
+				b1.setX(Player1.getX()+150);
 			}
 			
 		}
@@ -219,8 +220,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				b1.moveLeft(Player2.getSpeed());
 			}
 		}
-		g.fillRect(250, 375, 80, 10);
-		g.fillRect(250, 250, 1, 110);
 	}
 
 	public Driver() {
@@ -335,14 +334,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void keyPressed(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		// System.out.println(arg32.getKeyCode());
+		//System.out.println(arg32.getKeyCode());
 		/*
 		 * 65 = A
 		 * 68 = D
 		 * 87 = W
+		 * 83 = S
 		 * 37 = Left Arrow
 		 * 39 = Right Arrow 
-		 * 
+		 * 38 = Up Arrow
+		 * 40 = Down Arrow
 		 */
 		
 		if (freeze == false) {
@@ -377,6 +378,16 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			
 			}
 			 
+		}
+		if(possesion==false) {
+			if (arg32.getKeyCode() == 83) {//S button
+				//insert block method for player 1
+			}
+		}
+		if(possesion) {
+			if (arg32.getKeyCode() == 40) {//S button
+				//insert block method for player 2
+			}
 		}
 		if (freeze == false) {
 			if (arg32.getKeyCode() == 37) {

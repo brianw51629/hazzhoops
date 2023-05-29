@@ -142,8 +142,8 @@ public class Ball {
 		y=750;
 		double Up_Displacement = -550;
 		double Down_Displacement = 180;
-		double Right_Displacement = (1450-x)+40;
-		double Left_Displacement = (x-250);
+		double Right_Displacement = (1400-x)+40;
+		double Left_Displacement = (x-320);
 		vy = -(Math.sqrt(-2*gravity*Up_Displacement));
 		double Tup = Math.sqrt((-2*Up_Displacement)/gravity);
 		double Tdown = Math.sqrt((2*Down_Displacement)/gravity);
@@ -202,6 +202,9 @@ public class Ball {
 	}
 	public void setVX(double setter) {
 		vx = setter;
+	}
+	public void setX(int setter) {
+		x = setter;
 	}
 	public void setVY(double setter) {
 		vy = setter;
