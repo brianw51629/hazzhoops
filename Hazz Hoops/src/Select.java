@@ -37,8 +37,10 @@ public class Select extends Background {
 			if(m.intersects(box3)) {
 				b3 = true;
 			}
+			
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	

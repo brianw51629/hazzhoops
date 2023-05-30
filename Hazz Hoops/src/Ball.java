@@ -139,6 +139,8 @@ public class Ball {
 	
 	
 	public void thrown(int pl) {
+		
+		
 		y=750;
 		double Up_Displacement = -550;
 		double Down_Displacement = 180;
@@ -153,33 +155,6 @@ public class Ball {
 		if(pl==2) {
 			vx = -(Left_Displacement/(Tup+Tdown));
 		}
-		
-		
-		
-		
-		
-		
-		/*
-		vy = -20;
-		vx = newVX;
-		accel = 0.4;
-		*/
-		
-		/*
-		if(pl==1) {
-			slope = 400.0/Math.abs((1400-x));
-			vy = slope*-15;
-			System.out.println(vy);
-			vx = 10;	
-			
-		}
-		if(pl==2) {
-			slope = 400.0/(250-x);
-			vy = slope*-10;
-			System.out.println(vy);
-			vx = 10;	
-		}
-		*/
 	}
 	
 	
