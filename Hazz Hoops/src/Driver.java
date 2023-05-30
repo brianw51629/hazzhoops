@@ -382,11 +382,13 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if(possesion==false) {
 			if (arg32.getKeyCode() == 83) {//S button
 				//insert block method for player 1
+				System.out.println("p1 block worked");
 			}
 		}
 		if(possesion) {
 			if (arg32.getKeyCode() == 40) {//S button
 				//insert block method for player 2
+				System.out.println("p2 block worked");
 			}
 		}
 		if (freeze == false) {
