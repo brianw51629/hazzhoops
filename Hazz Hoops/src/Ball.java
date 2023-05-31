@@ -43,7 +43,7 @@ public class Ball {
 		img = getImage(newFileName);
 		init(x, y);
 	}
-	public void setPossesion(boolean set) {
+	public void setPossession(boolean set) {
 		possesion = set;
 	}
 	public void paint(Graphics g) {

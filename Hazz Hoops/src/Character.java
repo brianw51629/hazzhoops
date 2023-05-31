@@ -94,20 +94,19 @@ public class Character {
 		}
 		
 		
-		g.fillRect(x+110, y, 30, 200);
+		//g.fillRect(x+110, y, 30, 200);
 		
 		
 		//stuff?
 		tx.setToTranslation(x, y);
 		
-		
 		//flip signs to flip image
-		tx.scale(-0.25, 0.25);
+		tx.scale(0.25, 0.25);
 	}
 	
 	//reset for each player
 	public void reset(int pl) {
-		y=600;
+		//y=600;
 		//resets player1
 		if(pl==1) {
 			x=500;
@@ -130,26 +129,26 @@ public class Character {
 	//jump
 	public void jump() {
 		if(gravity != 1.0) {
-			vy=-10;
+			vy=-15;
 			gravity = 1.0;
 		}
 	}
 	
 	
 	//TODO: complete the block method, add in param to detect if "player" interacts
-	public boolean block() {
-		
+	public boolean block(int bx, int by) {
 		Rectangle player = new Rectangle(x+110, y, 30, 200);
-		
-		
-		
+		Rectangle ball = new Rectangle(bx + 2, by , 45, 45);
 		
 		if(gravity != 3.0) {
 			vy = -50;
 			gravity = 3.0;
+		}		
+		
+		if(player.intersects(ball)) {
+			return true;
 		}
-		return true;
-
+		return false;
 	}
 	
 	
@@ -194,6 +193,9 @@ public class Character {
 	}
 	public int getVX() {
 		return vx;
+	}
+	public int getVY() {
+		return vy;
 	}
 	public void setVX(int setter) {
 		vx = setter;
