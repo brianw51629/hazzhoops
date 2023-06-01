@@ -62,13 +62,19 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean p1Left = false;
 	boolean p2Left = false;
 	int picks = 0;
-	double timer = 150.0;
+	double timer = 450.0;
 	boolean shot = false;
 	boolean possession = true;
 	boolean Player1Block;
 	boolean Player2Block;
 	String player1Type = "";
 	String player2Type = "";
+	
+	Music bg = new Music("crowdSound.wav", true);
+	
+	Music bang = new Music("bangSound.wav", false);
+	Music block = new Music("block.wav" , false);
+	Music buzz = new Music("endBuzzer.wav", false);
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -132,6 +138,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			if (picks > 1) {
 				gameStart = true;
 				PlayerSelect = false;
+				bg.play();
 			}
 		}
 
@@ -159,6 +166,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				if (timer >= 0) {
 					timer -= 0.25;
 				}
+				
+				if (timer == 0) {
+					buzz.play();
+				}
 			}
 			g.drawString("" + points1, 765, 225);
 			g.drawString("" + points2, 945, 225);
@@ -180,6 +191,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 		// if ball makes it in hoop adding points
 		if (b1.hit(basket1) && shot) {
+			bang.play();
 			shot = false;
 			if (Player1.getX() <= 860) { //+3 points
 				points1 += 3;
@@ -191,6 +203,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Player2.reset(2);
 		}
 		if (b1.hit(basket2) && shot) {
+			bang.play();
 			shot = false;
 			if (Player2.getX() >= 860) {
 				points2 += 3;
@@ -249,6 +262,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// block code
 		if (Player1Block) {
 			if (Player1.block(b1.getX(), b1.getY())) {
+				block.play();
 				b1.setVY(3);
 				b1.setVX(0);
 				Player1.reset(1);
@@ -259,6 +273,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 		if (Player2Block) {
 			if (Player2.block(b1.getX(), b1.getY())) {
+				block.play();
 				b1.setVY(3);
 				b1.setVX(0);
 				Player1.reset(1);
@@ -292,6 +307,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
+		
 		/*
 		 * BufferedImage cursorImg; try { cursorImg = ImageIO.read(new
 		 * File("crosshair img.png")); Cursor blankCursor =
