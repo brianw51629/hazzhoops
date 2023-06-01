@@ -32,13 +32,13 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Character Player1 = new Character();
 	Character Player2 = new Character();
 	Ball b1 = new Ball();
-	Hoop h1 = new Hoop("HoopLeft.png","left");
-	Hoop h2 = new Hoop("HoopLeft.png","right");
+	Hoop h1 = new Hoop("HoopLeft.png", "left");
+	Hoop h2 = new Hoop("HoopLeft.png", "right");
 	MenuScreen ms = new MenuScreen();
 	Scoreboard s1 = new Scoreboard();
 	private int points1;
 	private int points2;
-	private int rand =	(int) (Math.random() * 2 + 1);
+	private int rand = (int) (Math.random() * 2 + 1);
 	// private boolean far = false;
 	// private boolean close = false;
 	private boolean freeze = false;
@@ -62,18 +62,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean p1Left = false;
 	boolean p2Left = false;
 	int picks = 0;
-	double timer = 450.0;
+	double timer = 50.0;
+	double endTimer = 50.0;
+	boolean gameEnd = false;
 	boolean shot = false;
 	boolean possession = true;
 	boolean Player1Block;
 	boolean Player2Block;
 	String player1Type = "";
 	String player2Type = "";
-	
+
 	Music bg = new Music("crowdSound.wav", true);
-	
+
 	Music bang = new Music("bangSound.wav", false);
-	Music block = new Music("block.wav" , false);
+	Music block = new Music("block.wav", false);
 	Music buzz = new Music("endBuzzer.wav", false);
 
 	public void paint(Graphics g) {
@@ -166,7 +168,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				if (timer >= 0) {
 					timer -= 0.25;
 				}
-				
+
 				if (timer == 0) {
 					buzz.play();
 				}
@@ -181,9 +183,28 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		}
 
 		if (timer == 0) {
-			gameStart = false;
-			PlayerSelect = false;
-			HighScore = true;
+			gameEnd = true;
+		}
+		if (gameEnd) {
+			g.setColor(Color.black);
+			freeze = true;
+			if (points1 > points2) {
+				g.drawString("Player 1 Wins", 700, 350);
+			} else if (points2 > points1) {
+				g.drawString("Player 2 Wins", 700, 350);
+			} else {
+				g.drawString("TIE", 790, 350);
+			}
+			if (endTimer >= 0) {
+				endTimer -= 0.25;
+			}
+			if (endTimer == 0) {
+
+				gameStart = false;
+				PlayerSelect = false;
+				HighScore = true;
+			}
+
 		}
 
 		// init ball starts with player 1 (left player)
@@ -193,9 +214,9 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (b1.hit(basket1) && shot) {
 			bang.play();
 			shot = false;
-			if (Player1.getX() <= 860) { //+3 points
+			if (Player1.getX() <= 860) { // +3 points
 				points1 += 3;
-			} else { //+2 points
+			} else { // +2 points
 				points1 += 2;
 			}
 
@@ -307,7 +328,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-		
+
 		/*
 		 * BufferedImage cursorImg; try { cursorImg = ImageIO.read(new
 		 * File("crosshair img.png")); Cursor blankCursor =
@@ -415,9 +436,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 					p2Right = false;
 					Player1.moveStop();
 					Player2.moveStop();
-					b1.moveStop();
-					Player1.jump();
+
 					if (possession) {
+						b1.moveStop();
+						Player1.jump();
 						b1.setVY(0.0);
 						b1.thrown(1);
 
@@ -462,9 +484,10 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 					p2Right = false;
 					Player1.moveStop();
 					Player2.moveStop();
-					b1.moveStop();
-					Player2.jump();
+
 					if (possession == false) {
+						b1.moveStop();
+						Player2.jump();
 						b1.setVY(0.0);
 						b1.thrown(2);
 

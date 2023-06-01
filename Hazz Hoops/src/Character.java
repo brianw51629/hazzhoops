@@ -128,7 +128,7 @@ public class Character {
 	
 	//jump
 	public void jump() {
-		if(gravity != 1.0) {
+		if(vy == 0) {
 			vy=-15;
 			gravity = 1.0;
 		}
@@ -140,7 +140,7 @@ public class Character {
 		Rectangle player = new Rectangle(x+110, y, 30, 200);
 		Rectangle ball = new Rectangle(bx + 2, by , 45, 45);
 		
-		if(gravity != 3.0) {
+		if(vy == 0) {
 			vy = -50;
 			gravity = 3.0;
 		}		
