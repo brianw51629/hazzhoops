@@ -32,20 +32,20 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Character Player1 = new Character();
 	Character Player2 = new Character();
 	Ball b1 = new Ball();
-	Hoop h1 = new Hoop();
-	Hoop h2 = new Hoop("HoopRight.png");
+	Hoop h1 = new Hoop("HoopLeft.png","left");
+	Hoop h2 = new Hoop("HoopLeft.png","right");
 	MenuScreen ms = new MenuScreen();
 	Scoreboard s1 = new Scoreboard();
 	private int points1;
 	private int points2;
-	private int rand = (int) (Math.random() * 2 + 1);
-	//private boolean far = false;
-	//private boolean close = false;
+	private int rand =	(int) (Math.random() * 2 + 1);
+	// private boolean far = false;
+	// private boolean close = false;
 	private boolean freeze = false;
-	Rectangle basket1 = new Rectangle(1450, 400, 60, 10);
-	Rectangle basket2 = new Rectangle(300, 350, 60, 10);
-	Rectangle back1 = new Rectangle(1550, 250, 1, 100);
-	Rectangle back2 = new Rectangle(200, 250, 1, 100);
+	Rectangle basket1 = new Rectangle(1450, 375, 80, 10);
+	Rectangle basket2 = new Rectangle(265, 375, 80, 10);
+	Rectangle back1 = new Rectangle(1550, 250, 1, 110);
+	Rectangle back2 = new Rectangle(275, 250, 1, 110);
 	boolean PlayerSelect = false;
 	boolean HighScore = false;
 	Select ps = new Select();
@@ -62,57 +62,71 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean p1Left = false;
 	boolean p2Left = false;
 	int picks = 0;
-	double timer = 100.0;
+	double timer = 150.0;
 	boolean shot = false;
-	
+	boolean possession = true;
+	boolean Player1Block;
+	boolean Player2Block;
+	String player1Type = "";
+	String player2Type = "";
 
 	public void paint(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(picks);
+		// System.out.println(picks);
 		ms.paint(g);
 
 		if (PlayerSelect) {
-			// randomly selects which gym to choose
-
+			// paints the select screen
 			ps.paint(g);
 			g.setColor(Color.green);
+
+			// if box 1 is clicked
 			if (gbox1) {
-				g.fillRect(265, 760, 210, 140);
-				if(picks==1) {
+				if (picks == 1) {
 					Player1 = new Balanced(1);
 					Player1.changePicture("/imgs/MediumPlayerDefault.png");
+					g.fillRect(265, 760, 210, 140);
+					player1Type = "Medium";
 				}
-				if(picks==2) {
+				if (picks == 2) {
 					Player2 = new Balanced(2);
 					Player2.changePicture("/imgs/MediumPlayerDefault.png");
+					player2Type = "Medium";
 				}
 				ps.setB1(false);
+				gbox1 = false;
 			}
+
 			if (gbox2) {
 				g.fillRect(795, 760, 210, 140);
-				if(picks==1) {
+				if (picks == 1) {
 					Player1 = new Short(1);
 					Player1.changePicture("/imgs/ShortPlayerDefault.png");
-					
+					player1Type = "Short";
 				}
-				if(picks==2) {
+				if (picks == 2) {
 					Player2 = new Short(2);
 					Player2.changePicture("/imgs/ShortPlayerDefault.png");
-					
+					player2Type = "Short";
 				}
 				ps.setB2(false);
+				gbox2 = false;
 			}
+
 			if (gbox3) {
 				g.fillRect(1340, 760, 210, 140);
-				if(picks==1) {
+				if (picks == 1) {
 					Player1 = new Tall(1);
 					Player1.changePicture("/imgs/TallPlayerDefault.png");
+					player1Type = "Tall";
 				}
-				if(picks==2) {
+				if (picks == 2) {
 					Player2 = new Tall(2);
 					Player2.changePicture("/imgs/TallPlayerDefault.png");
+					player2Type = "Tall";
 				}
 				ps.setB3(false);
+				gbox3 = false;
 			}
 
 			if (picks > 1) {
@@ -120,12 +134,15 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				PlayerSelect = false;
 			}
 		}
-		System.out.println(picks);
+
+		// System.out.println(picks);
 		if (gameStart) {
 			if (rand == 1) {
 				bckg.paint(g);
 			} else if (rand == 2) {
 				obckg.paint(g);
+				h1.changePicture("OutHoop.png");
+				h2.changePicture("OutHoop.png");
 			}
 			s1.paint(g);
 			b1.paint(g);
@@ -140,70 +157,125 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			if (gameStart) {
 				g.drawString("Time: " + ((int) timer / 10), 750, 100);
 				if (timer >= 0) {
-					timer -= 0.5;
+					timer -= 0.25;
 				}
 			}
 			g.drawString("" + points1, 765, 225);
 			g.drawString("" + points2, 945, 225);
 		}
 
-		if (HighScore&&(!gameStart&&!PlayerSelect)) {
-			g.drawRect(0, 0, 1000, 2000);
+		// selecting Highscore
+		if (HighScore && (!gameStart && !PlayerSelect)) {
+			g.fillRect(0, 0, 2000, 2000);
 		}
 
-		// Font gameEndFont = new Font("SansSerif", Font.PLAIN,60);
-		// Font restartFont = new Font("SansSerif", Font.PLAIN,25);
+		if (timer == 0) {
+			gameStart = false;
+			PlayerSelect = false;
+			HighScore = true;
+		}
 
-		g.setColor(Color.blue);
-		g.fillRect(1550, 250, 1, 100);
-		
-		if (b1.hit(basket1)&&shot) {
-			shot=false;
-			points1 += 3;
-			Player1.reset(1);
-			Player2.reset(2);	
-		}
-		/*
-		if (b1.hit(basket1)) {
-			points1 += 2;
-			Player1.reset(1);
-			Player2.reset(2);
-		}
-		*/
-		if (b1.hit(basket2)) {
-			points2 += 3;
+		// init ball starts with player 1 (left player)
+		b1.setPossession(possession);
+
+		// if ball makes it in hoop adding points
+		if (b1.hit(basket1) && shot) {
+			shot = false;
+			if (Player1.getX() <= 860) { //+3 points
+				points1 += 3;
+			} else { //+2 points
+				points1 += 2;
+			}
+
 			Player1.reset(1);
 			Player2.reset(2);
 		}
-		if (b1.hit(basket2)) {
-			points2 += 2;
+		if (b1.hit(basket2) && shot) {
+			shot = false;
+			if (Player2.getX() >= 860) {
+				points2 += 3;
+			} else {
+				points2 += 2;
+			}
 			Player1.reset(1);
 			Player2.reset(2);
 		}
+
 		if (b1.getReset()) {
 			freeze = false;
+			if (possession) {
+				possession = false;
+			} else if (possession == false) {
+				possession = true;
+			}
 			b1.resetShot(false);
 		}
-		if(b1.hit(back1)) {
-			b1.setVX(-3);
+		if (b1.hit(back1)) {
+			b1.setVX(-5);
 		}
-		
-		if(p1Right) {
+		if (b1.hit(back2)) {
+			b1.setVX(-5);
+		}
+
+		if (p1Right) {
 			Player1.moveRight();
-			b1.moveRight(Player1.getSpeed());
+			if (possession) {
+				Player1.moveRight();
+				b1.setX(Player1.getX() + 165);
+			}
+
 		}
-		if(p2Right) {
+		if (p2Right) {
 			Player2.moveRight();
-			b1.moveRight(Player2.getSpeed());
+			if (possession == false) {
+				b1.setX(Player2.getX() + 35);
+			}
+
 		}
-		if(p1Left) {
+		if (p1Left) {
 			Player1.moveLeft();
-			b1.moveLeft(Player1.getSpeed());
+			if (possession) {
+				b1.setX(Player1.getX() + 140);
+			}
+
 		}
-		if(p2Left) {
+		if (p2Left) {
 			Player2.moveLeft();
-			b1.moveLeft(Player2.getSpeed());
+			if (possession == false) {
+				b1.setX(Player2.getX() + 35);
+			}
 		}
+
+		// block code
+		if (Player1Block) {
+			if (Player1.block(b1.getX(), b1.getY())) {
+				b1.setVY(3);
+				b1.setVX(0);
+				Player1.reset(1);
+				Player2.reset(2);
+				Player1Block = false;
+				possession = false;
+			}
+		}
+		if (Player2Block) {
+			if (Player2.block(b1.getX(), b1.getY())) {
+				b1.setVY(3);
+				b1.setVX(0);
+				Player1.reset(1);
+				Player2.reset(2);
+				Player2Block = false;
+				possession = true;
+			}
+		}
+		if (Player1.getVY() > 0) {
+			Player1Block = false;
+			Player1.changePicture("/imgs/" + player1Type + "PlayerDefault.png");
+		}
+		if (Player2.getVY() > 0) {
+			Player2Block = false;
+			Player2.changePicture("/imgs/" + player2Type + "PlayerDefault.png");
+		}
+
 	}
 
 	public Driver() {
@@ -247,27 +319,29 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (ms.play(arg0) && HighScore == false) {
 			PlayerSelect = true;
 		}
-		if(PlayerSelect) {
+
+		// playerSelect Screen
+		if (PlayerSelect) {
 			if (ps.changeScreen(arg0)) {
-			if (ps.isB1()) {
-				gbox1 = true;
-				picks++;
+				if (ps.isB1()) {
+					gbox1 = true;
+					picks++;
+				}
 			}
-		}
 
-		if (ps.changeScreen(arg0)) {
-			if (ps.isB2()) {
-				gbox2 = true;
-				picks++;
+			if (ps.changeScreen(arg0)) {
+				if (ps.isB2()) {
+					gbox2 = true;
+					picks++;
+				}
 			}
-		}
 
-		if (ps.changeScreen(arg0)) {
-			if (ps.isB3()) {
-				gbox3 = true;
-				picks++;
+			if (ps.changeScreen(arg0)) {
+				if (ps.isB3()) {
+					gbox3 = true;
+					picks++;
+				}
 			}
-		}
 		}
 	}
 
@@ -286,21 +360,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
-		// if High Score button is pressed
-		
-		
-		/*
-		if (ps.changeScreen(arg0)) {
-			if (Player1Select == true) {
-
-				Player2Select = true;
-			}
-			Player1Select = true;
-
-		}
-		*/
-
 	}
 
 	@Override
@@ -320,125 +379,126 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// TODO Auto-generated method stub
 		// System.out.println(arg32.getKeyCode());
 		/*
-		 * 65 = A
-		 * 68 = D
-		 * 87 = W
-		 * 37 = Left Arrow
-		 * 39 = Right Arrow 
-		 * 
+		 * 65 = A 68 = D 87 = W 83 = S 37 = Left Arrow 39 = Right Arrow 38 = Up Arrow 40
+		 * = Down Arrow
 		 */
-		
-		if (freeze == false) {
+		if (gameStart) {
+			if (freeze == false) {
 
-			if (arg32.getKeyCode() == 65) {//A button
-				p1Left = true;
-			}
-			if (arg32.getKeyCode() == 68) {//D button
-				p1Right = true;
-			}
-			
-			if (arg32.getKeyCode() == 87) {//W button
-				Player1.moveStop();
-				b1.moveStop();
-				//b1.setVY(0);
-				Player1.jump();
-				b1.setVY(0.0);
-				b1.setY(755);
-				if(Player1.getX()>1000) {
-					b1.thrown(1);
-				}else {
-					b1.thrown(1);
+				if (arg32.getKeyCode() == 65) {// A button
+					p1Left = true;
 				}
-				
-				freeze = true;
-				shot = true;
-				//far code
-				
-				
-				//close code
-				
-			
-			
-			}
-			 
-		}
-		if (freeze == false) {
-			if (arg32.getKeyCode() == 37) {
-				p2Left = true;
-			}
-			if (arg32.getKeyCode() == 39) {
-				p2Right = true;
-			}
-
-			if (arg32.getKeyCode() == 38) {
-				Player2.moveStop();
-				b1.moveStop();
-				b1.setVY(0);
-				Player2.jump();
-				
-				freeze = true;
-				
-				/*
-				if (Player2.getX() > 1050) {
-					//b1.leftfar();
-					//far = true;
-					System.out.println("far");
-
+				if (arg32.getKeyCode() == 68) {// D button
+					p1Right = true;
 				}
 
-				if (Player2.getX() < 1050) {
-					if (Player2.getX() < 250) {
-						//b1.leftclose();
-						//close = true;
-					} else {
-						//b1.leftnormal();
-						//close = true;
+				if (arg32.getKeyCode() == 87) {// W button
+					p1Left = false;
+					p1Right = false;
+					p2Left = false;
+					p2Right = false;
+					Player1.moveStop();
+					Player2.moveStop();
+					b1.moveStop();
+					Player1.jump();
+					if (possession) {
+						b1.setVY(0.0);
+						b1.thrown(1);
+
+						freeze = true;
+						shot = true;
+						b1.setShot(true);
 					}
+				}
+
+			}
+			if (possession == false) {
+				if (arg32.getKeyCode() == 83) {// S button
+					// insert block method for player 1
+					Player1Block = true;
+					Player1.changePicture("/imgs/" + player1Type + "PlayerJump.png");
+				}
+			}
+			if (possession) {
+				if (arg32.getKeyCode() == 40) {// down arrow button
+					// insert block method for player 2
+					Player2Block = true;
+					Player2.changePicture("/imgs/" + player2Type + "PlayerJump.png");
 
 				}
-				
-				*/
 			}
-			
+
+			if (freeze == false) {
+				// move left
+				if (arg32.getKeyCode() == 37) {
+					p2Left = true;
+				}
+				// move right
+				if (arg32.getKeyCode() == 39) {
+					p2Right = true;
+				}
+
+				// jump button
+				if (arg32.getKeyCode() == 38) {
+					p1Left = false;
+					p1Right = false;
+					p2Left = false;
+					p2Right = false;
+					Player1.moveStop();
+					Player2.moveStop();
+					b1.moveStop();
+					Player2.jump();
+					if (possession == false) {
+						b1.setVY(0.0);
+						b1.thrown(2);
+
+						freeze = true;
+						shot = true;
+						b1.setShot(true);
+					}
+				}
+
+			}
 		}
-		
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg32) {
 		// TODO Auto-generated method stub
-		if (arg32.getKeyCode() == 65) {
-			if (freeze == false) {
-				p1Left=false;
-				Player1.moveStop();
-				b1.moveStop();
-			}
+		if (gameStart) {
+			if (arg32.getKeyCode() == 65) {
+				if (freeze == false) {
+					p1Left = false;
+					Player1.moveStop();
+					b1.moveStop();
+				}
 
-		}
-		if (arg32.getKeyCode() == 68) {
-			if (freeze == false) {
-				p1Right=false;
-				Player1.moveStop();
-				b1.moveStop();
 			}
-		}
-		if (arg32.getKeyCode() == 37) {
-			if (freeze == false) {
-				p2Left = false;
-				Player2.moveStop();
-				b1.moveStop();
+			if (arg32.getKeyCode() == 68) {
+				if (freeze == false) {
+					p1Right = false;
+					Player1.moveStop();
+					b1.moveStop();
+				}
 			}
+			if (arg32.getKeyCode() == 37) {
+				if (freeze == false) {
+					p2Left = false;
+					Player2.moveStop();
+					b1.moveStop();
+				}
 
-		}
-		if (arg32.getKeyCode() == 39) {
-			if (freeze == false) {
-				p2Right = false;
-				Player2.moveStop();
-				b1.moveStop();
+			}
+			if (arg32.getKeyCode() == 39) {
+				if (freeze == false) {
+					p2Right = false;
+					Player2.moveStop();
+					b1.moveStop();
+				}
 			}
 		}
-		
+
 	}
 
 	@Override

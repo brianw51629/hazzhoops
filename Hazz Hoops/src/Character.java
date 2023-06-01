@@ -22,6 +22,7 @@ public class Character {
 	private int speed;
 	private int steal;
 	private int player;
+	private double gravity;
 	public Character() {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
@@ -36,15 +37,11 @@ public class Character {
 		player=0;
 		 // initialize the location of the image
 					// use your variables
-		
 	}
 	
 	
 	public Character(int bl, int sh, int sp, int st, int pl) {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
-
-		
-		
 		
 		vx=0;
 		vy=0;
@@ -54,8 +51,8 @@ public class Character {
 		speed=sp;
 		steal=st;
 		player=pl;
-		//end of ratings
 		y=600;
+		
 		//sets x based on player 1 or 2
 		if(pl==1) {
 			x=500;
@@ -66,8 +63,6 @@ public class Character {
 		
 		tx = AffineTransform.getTranslateInstance(x, y);
 		tx.scale(0.25,0.25);
-		//System.out.println("x is "+x+" and y is "+y);
-		
 	}
 
 	
@@ -77,23 +72,10 @@ public class Character {
 	}
 
 	public void paint(Graphics g) {
-		// these are the 2 lines of code needed draw an image on the screen
 		Graphics2D g2 = (Graphics2D) g;
-		
-		//System.out.println(x);
-		//update();
 		g2.drawImage(img, tx, null);
-		g.setColor(new Color(0,0,0));
 		
-		//start of jump going down
-		if(y<=525) {
-			vy=10;
-		}
-		if(y>600) {
-			vy=0;
-			y=600;
-		}
-		//end of jump going down
+		//boundaries
 		if(x>=1250) {
 			x=1200;
 		}
@@ -101,67 +83,91 @@ public class Character {
 			x=325;
 		}
 		
+		//updating characters
 		x+=vx;
 		y+=vy;
-		tx.setToTranslation(x, y);
-		tx.scale(0.25, 0.25);
-		//g.drawRect(x+20,y,75,75);
+		vy += gravity;
+		if(y > 600) {
+			gravity = 0;
+			vy = 0;
+			y = 600;
+		}
 		
-	}
-
-	public void setNewV(int grabbed) {
-		newV=(grabbed+1)*2;
+		
+		//g.fillRect(x+110, y, 30, 200);
+		
+		
+		//stuff?
+		tx.setToTranslation(x, y);
+		
+		//flip signs to flip image
+		tx.scale(0.25, 0.25);
 	}
 	
 	//reset for each player
 	public void reset(int pl) {
-		y=600;
-		//resets p1
+		//y=600;
+		//resets player1
 		if(pl==1) {
 			x=500;
 		}
-		//resets p2
+		//resets player2
 		if(pl==2) {
 			x=900;
-		}
-		
-		
-		
+		}	
 	}
 	
+	
+	//moving character
 	public void moveLeft() {
-		
 		vx=-(speed);
 	}
 	public void moveRight() {
 		vx=(speed);
 	}
 	
-	
-	
+	//jump
 	public void jump() {
-		//jump
-		vy=-10;
+		if(gravity != 1.0) {
+			vy=-15;
+			gravity = 1.0;
+		}
+	}
+	
+	
+	//TODO: complete the block method, add in param to detect if "player" interacts
+	public boolean block(int bx, int by) {
+		Rectangle player = new Rectangle(x+110, y, 30, 200);
+		Rectangle ball = new Rectangle(bx + 2, by , 45, 45);
+		
+		if(gravity != 3.0) {
+			vy = -50;
+			gravity = 3.0;
+		}		
+		
+		if(player.intersects(ball)) {
+			return true;
+		}
+		return false;
 	}
 	
 	
 	
 	
+	
+	//stopping the character
 	public void moveStop() {
-		//zeros the velocity for key release
 		vx=0;
 	}
 	
-	
-	
-	
+	//what does this do
 	private void init(double a, double b) {
 		tx.setToTranslation(a, b);
 		tx.scale(0, 0);
 	}
 
 	
-	
+	//get the image or something
 	private Image getImage(String path) {
 		Image tempImage = null;
 		try {
@@ -174,6 +180,8 @@ public class Character {
 	}
 	
 	
+	
+	//getters and setters
 	public int getSpeed() {
 		return speed;
 	}
@@ -183,38 +191,13 @@ public class Character {
 	public int getY() {
 		return y;
 	}
-	
 	public int getVX() {
 		return vx;
+	}
+	public int getVY() {
+		return vy;
 	}
 	public void setVX(int setter) {
 		vx = setter;
 	}
-	
-	
-	
-	
-	
-	
-	
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+}

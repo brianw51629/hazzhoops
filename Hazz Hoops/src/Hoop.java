@@ -14,7 +14,7 @@ public class Hoop {
 	private int x, y;
 	private Image img;
 	private AffineTransform tx;
- 
+	private boolean left=true;
 	public Hoop() {
 		img = getImage("/imgs/HoopLeft.png"); // load the image for Background
 
@@ -26,20 +26,29 @@ public class Hoop {
 
 	}
  
-	public Hoop(String fileName) {
+	public Hoop(String fileName, String lr) {
 		img = getImage("/imgs/" + fileName); // load the image for Tree
 
 		tx = AffineTransform.getTranslateInstance(x, y);
 		y=240;
-		x=1200;
+		if(lr.equals("right")) {
+			x=1790;
+			left=false;
+		}else {
+			x=0;
+		}
 		// initialize the location of the image
 					// use your variables
 	}
 
 	public void changePicture(String newFileName) {
 		img = getImage("/imgs/"+newFileName);
-		if(newFileName=="afternoonBackground")
-		init(x+50, y);
+		
+		if(left==false) {
+			x=1825;
+		}else {
+			x=-25;
+		}
 	}
 
 	public void paint(Graphics g) {
@@ -48,7 +57,12 @@ public class Hoop {
 		
 		g2.drawImage(img, tx, null);
 		tx.setToTranslation(x, y);
-		tx.scale(0.3, 0.3);
+		if(left) {
+			tx.scale(0.3, 0.3);
+		}else {
+			tx.scale(-0.3, 0.3);
+		}
+		
 	}
 
 	private void update() {
