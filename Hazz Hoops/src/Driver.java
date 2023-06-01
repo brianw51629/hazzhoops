@@ -32,13 +32,13 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Character Player1 = new Character();
 	Character Player2 = new Character();
 	Ball b1 = new Ball();
-	Hoop h1 = new Hoop();
-	Hoop h2 = new Hoop("HoopRight.png");
+	Hoop h1 = new Hoop("HoopLeft.png","left");
+	Hoop h2 = new Hoop("HoopLeft.png","right");
 	MenuScreen ms = new MenuScreen();
 	Scoreboard s1 = new Scoreboard();
 	private int points1;
 	private int points2;
-	private int rand = (int) (Math.random() * 2 + 1);
+	private int rand =	(int) (Math.random() * 2 + 1);
 	// private boolean far = false;
 	// private boolean close = false;
 	private boolean freeze = false;
@@ -141,6 +141,8 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				bckg.paint(g);
 			} else if (rand == 2) {
 				obckg.paint(g);
+				h1.changePicture("OutHoop.png");
+				h2.changePicture("OutHoop.png");
 			}
 			s1.paint(g);
 			b1.paint(g);
@@ -164,7 +166,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 		// selecting Highscore
 		if (HighScore && (!gameStart && !PlayerSelect)) {
-			g.drawRect(0, 0, 1000, 2000);
+			g.fillRect(0, 0, 2000, 2000);
 		}
 
 		if (timer == 0) {
@@ -176,12 +178,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		// init ball starts with player 1 (left player)
 		b1.setPossession(possession);
 
-		// if ball makes it in hoop +3 points
+		// if ball makes it in hoop adding points
 		if (b1.hit(basket1) && shot) {
 			shot = false;
-			if (Player1.getX() <= 860) {
+			if (Player1.getX() <= 860) { //+3 points
 				points1 += 3;
-			} else {
+			} else { //+2 points
 				points1 += 2;
 			}
 
