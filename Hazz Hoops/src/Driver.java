@@ -22,7 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+import java.util.Arrays;
 import javax.swing.JLabel;
 
 public class Driver extends JPanel implements ActionListener, MouseListener, KeyListener {
@@ -36,6 +36,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	Hoop h2 = new Hoop("HoopLeft.png", "right");
 	MenuScreen ms = new MenuScreen();
 	Scoreboard s1 = new Scoreboard();
+	HighScore hs = new HighScore();
 	private int points1;
 	private int points2;
 	private int rand = (int) (Math.random() * 2 + 1);
@@ -62,7 +63,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean p1Left = false;
 	boolean p2Left = false;
 	int picks = 0;
-	double timer = 50.0;
+	double timer = 150.0;
 	double endTimer = 50.0;
 	boolean gameEnd = false;
 	boolean shot = false;
@@ -71,18 +72,22 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 	boolean Player2Block;
 	String player1Type = "";
 	String player2Type = "";
-
-	Music bg = new Music("crowdSound.wav", true);
+	int[] list = new int[10];
+	boolean updateHS = false;
+	Music bg = new Music("background.wav", true);
 
 	Music bang = new Music("bangSound.wav", false);
-	Music block = new Music("block.wav", false);
+	Music block = new Music("block sound.wav", false);
 	Music buzz = new Music("endBuzzer.wav", false);
-
+	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		// System.out.println(picks);
 		ms.paint(g);
-
+		if(updateHS) {
+			hs.list(list);
+			updateHS = false;
+		}
 		if (PlayerSelect) {
 			// paints the select screen
 			ps.paint(g);
@@ -161,6 +166,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			Player2.paint(g);
 
 			Font plainFont = new Font("SanSerif", Font.PLAIN, 60);
+			
 			g.setFont(plainFont);
 			g.setColor(Color.white);
 			if (gameStart) {
@@ -179,7 +185,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 		// selecting Highscore
 		if (HighScore && (!gameStart && !PlayerSelect)) {
+			Font BIGplainFont = new Font("SanSerif", Font.PLAIN, 75);
 			g.fillRect(0, 0, 2000, 2000);
+			g.setColor(Color.white);
+			g.setFont(BIGplainFont);
+			g.drawString("HighScores", 650, 100);
+			for(int i = 0;i<10;i++) {
+				g.drawString(list[i]+"", 800, (i*75)+200);
+			}
 		}
 
 		if (timer == 0) {
@@ -199,10 +212,12 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				endTimer -= 0.25;
 			}
 			if (endTimer == 0) {
-
+				updateList1();
+				updateList2();
 				gameStart = false;
 				PlayerSelect = false;
 				HighScore = true;
+				updateHS = true;
 			}
 
 		}
@@ -328,7 +343,6 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-
 		/*
 		 * BufferedImage cursorImg; try { cursorImg = ImageIO.read(new
 		 * File("crosshair img.png")); Cursor blankCursor =
@@ -338,12 +352,17 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		 * } catch (IOException e) { // TODO Auto-generated catch block
 		 * e.printStackTrace(); }
 		 */
-
+		list=Arrays.copyOf(hs.origList(), 10);
 	}
 
 	public static void main(String[] arg) {
 		Driver f = new Driver();
-
+		try {
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -381,7 +400,28 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 			}
 		}
 	}
-
+	public void updateList1() {
+		for(int i = 0;i<10;i++) {
+			if(points1>list[i]) {
+				for(int j = list.length-1;j>i;j--) {
+					list[j]=list[j-1];
+				}
+				list[i]=(points1);
+				break;
+			}
+		}
+	}
+	public void updateList2() {
+		for(int i = 0;i<10;i++) {
+			if(points2>list[i]) {
+				for(int j = list.length-1;j>i;j--) {
+					list[j]=list[j-1];
+				}
+				list[i]=(points2);
+				break;
+			}
+		}
+	}
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
