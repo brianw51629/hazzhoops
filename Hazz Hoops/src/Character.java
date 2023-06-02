@@ -135,13 +135,12 @@ public class Character {
 	}
 	
 	
-	//TODO: complete the block method, add in param to detect if "player" interacts
 	public boolean block(int bx, int by) {
 		Rectangle player = new Rectangle(x+110, y, 30, 200);
-		Rectangle ball = new Rectangle(bx + 2, by , 45, 45);
+		Rectangle ball = new Rectangle(bx, by , 45, 45);
 		
-		if(vy == 0) {
-			vy = -50;
+		if(gravity != 3.0) {
+			vy = -55;
 			gravity = 3.0;
 		}		
 		

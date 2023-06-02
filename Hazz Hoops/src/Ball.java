@@ -81,14 +81,10 @@ public class Ball {
 					x = 670;
 				}
 			}
-			//ends shot arc
-			
 			
 			x += vx;
 			y += vy;
 			vy += gravity;
-			
-		//g.drawRect(x+20,y,75,75);
 		
 	}
 	
@@ -193,7 +189,7 @@ public class Ball {
 		
 		
 		
-		Rectangle ballHitbox = new Rectangle(x + 2, y , 45, 45);
+		Rectangle ballHitbox = new Rectangle(x, y , 45, 45);
 		
 		
 		if(h.intersects(ballHitbox)) {
