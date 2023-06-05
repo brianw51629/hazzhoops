@@ -289,7 +289,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 		if (p1Right) {
 			Player1.moveRight();
 			if (possession) {
-				Player1.moveRight();
+				//Player1.moveRight();
 				b1.setX(Player1.getX() + 165);
 			}
 		}
@@ -532,11 +532,11 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 
 				// jump button
 				if (arg32.getKeyCode() == 38) { //up arrow button
-					p1Left = false;
-					p1Right = false;
+					p2Left = false;
+					p2Right = false;
 					//p2Left = false;
 					//p2Right = false;
-					Player1.moveStop();
+					Player2.moveStop();
 					//Player2.moveStop();
 
 					if (possession == false) {//if player 2 has possession
@@ -564,7 +564,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				if (freeze == false) {
 					p1Left = false;
 					Player1.moveStop();
-					b1.moveStop();
+					//b1.moveStop();
 				}
 
 			}
@@ -572,14 +572,14 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				if (freeze == false) {
 					p1Right = false;
 					Player1.moveStop();
-					b1.moveStop();
+					//b1.moveStop();
 				}
 			}
 			if (arg32.getKeyCode() == 37) { //Left arrow
 				if (freeze2 == false) {
 					p2Left = false;
 					Player2.moveStop();
-					b1.moveStop();
+					//b1.moveStop();
 				}
 
 			}
@@ -587,7 +587,7 @@ public class Driver extends JPanel implements ActionListener, MouseListener, Key
 				if (freeze2 == false) {
 					p2Right = false;
 					Player2.moveStop();
-					b1.moveStop();
+					//b1.moveStop();
 				}
 			}
 		}

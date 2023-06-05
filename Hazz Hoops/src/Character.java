@@ -23,6 +23,7 @@ public class Character {
 	private int steal;
 	private int player;
 	private double gravity;
+	private int temp;
 	public Character() {
 		img = getImage("/imgs/tempPlayer.png"); // load the image for Tree
 
@@ -61,6 +62,8 @@ public class Character {
 			x=900;
 		}
 		
+		temp = speed;
+		
 		tx = AffineTransform.getTranslateInstance(x, y);
 		tx.scale(0.25,0.25);
 	}
@@ -91,6 +94,7 @@ public class Character {
 			gravity = 0;
 			vy = 0;
 			y = 600;
+			speed = temp;
 		}
 		
 		
@@ -136,12 +140,15 @@ public class Character {
 	
 	
 	public boolean block(int bx, int by) {
+		
+		
 		Rectangle player = new Rectangle(x+110, y, 30, 200);
 		Rectangle ball = new Rectangle(bx, by , 45, 45);
 		
 		if(gravity != 3.0) {
 			vy = -55;
 			gravity = 3.0;
+			speed = 15;
 		}		
 		
 		if(player.intersects(ball)) {
